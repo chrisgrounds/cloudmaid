@@ -13,7 +13,7 @@ fn main() {
     Ok(contents) => {
       let cloudformation_template: Template = from_str(&contents.to_string()).unwrap();
       let ast = AST::from(cloudformation_template);
-      let mermaid_representation = ast.to_mermaid();
+      let mermaid = ast.to_mermaid();
 
       if fs::metadata(&args.output_file).is_ok() {
         match fs::remove_file(&args.output_file) {
@@ -22,8 +22,8 @@ fn main() {
         }
       }
 
-      match fs::write(&args.output_file, mermaid_representation) {
-        Ok(_) => println!("Mermaid representation written to {}", &args.output_file),
+      match fs::write(&args.output_file, mermaid) {
+        Ok(_) => println!("Mermaid written to {}", &args.output_file),
         Err(e) => println!("Error writing to file: {}", e),
       }
     }

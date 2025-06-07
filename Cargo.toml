@@ -1,5 +1,5 @@
 [package]
-name = "cf-to-mermaid"
+name = "cloudmaid"
 version = "0.1.0"
 edition = "2024"
 
