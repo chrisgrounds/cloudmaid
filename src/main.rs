@@ -6,7 +6,7 @@ use cf_to_mermaid::cloudformation::template::Template;
 
 fn main() {
   println!("Hello, world!");
-  let file_path = "sample-stack.template.json";
+  let file_path = "data/sample-stack.template.json";
   let output_file_path = "output.md";
 
   match fs::read_to_string(file_path) {
