@@ -1,6 +1,6 @@
 {
  "Resources": {
-  "undefinedsamplerole619145D4": {
+  "samplerole619145D4": {
    "Type": "AWS::IAM::Role",
    "Properties": {
     "AssumeRolePolicyDocument": {
@@ -20,7 +20,7 @@
     "aws:cdk:path": "sample-stack/sample-role/Resource"
    }
   },
-  "undefinedsampleroleundefinedsamplepolicy1CAB6B24": {
+  "samplerolesamplepolicy1CAB6B24": {
    "Type": "AWS::IAM::Policy",
    "Properties": {
     "PolicyDocument": {
@@ -60,7 +60,7 @@
          [
           "arn:aws:events:eu-west-2:202468521054:event-bus/",
           {
-           "Fn::ImportValue": "undefined-sample-eventbus-export-name"
+           "Fn::ImportValue": "-sample-eventbus-export-name"
           }
          ]
         ]
@@ -73,7 +73,7 @@
         "dynamodb:UpdateItem"
        ],
        "Effect": "Allow",
-       "Resource": "arn:aws:dynamodb:eu-west-2:202468521054:table/undefined-sample-device-register"
+       "Resource": "arn:aws:dynamodb:eu-west-2:202468521054:table/-sample-device-register"
       },
       {
        "Action": [
@@ -81,7 +81,7 @@
         "dynamodb:Query"
        ],
        "Effect": "Allow",
-       "Resource": "arn:aws:dynamodb:eu-west-2:202468521054:table/undefined-sample-update-log"
+       "Resource": "arn:aws:dynamodb:eu-west-2:202468521054:table/-sample-update-log"
       },
       {
        "Action": [
@@ -91,7 +91,7 @@
         "dynamodb:Scan"
        ],
        "Effect": "Allow",
-       "Resource": "arn:aws:dynamodb:eu-west-2:202468521054:table/undefined-sample-update-status-poll-queue"
+       "Resource": "arn:aws:dynamodb:eu-west-2:202468521054:table/-sample-update-status-poll-queue"
       },
       {
        "Action": [
@@ -99,7 +99,7 @@
         "dynamodb:PutItem"
        ],
        "Effect": "Allow",
-       "Resource": "arn:aws:dynamodb:eu-west-2:202468521054:table/undefined-sample-update-status-poll-queue-archive"
+       "Resource": "arn:aws:dynamodb:eu-west-2:202468521054:table/-sample-update-status-poll-queue-archive"
       },
       {
        "Action": [
@@ -109,7 +109,7 @@
         "dynamodb:UpdateItem"
        ],
        "Effect": "Allow",
-       "Resource": "arn:aws:dynamodb:eu-west-2:202468521054:table/undefined-sample-credit-register"
+       "Resource": "arn:aws:dynamodb:eu-west-2:202468521054:table/-sample-credit-register"
       },
       {
        "Action": [
@@ -123,15 +123,15 @@
       {
        "Action": "secretsmanager:GetSecretValue",
        "Effect": "Allow",
-       "Resource": "arn:aws:secretsmanager:eu-west-2:202468521054:secret:guru-sample-adoption-dispatcher-key-undefined-*"
+       "Resource": "arn:aws:secretsmanager:eu-west-2:202468521054:secret:guru-sample-adoption-dispatcher-key--*"
       }
      ],
      "Version": "2012-10-17"
     },
-    "PolicyName": "undefined-sample-policy-name",
+    "PolicyName": "-sample-policy-name",
     "Roles": [
      {
-      "Ref": "undefinedsamplerole619145D4"
+      "Ref": "samplerole619145D4"
      }
     ]
    },
@@ -139,7 +139,7 @@
     "aws:cdk:path": "sample-stack/sample-role/sample-policy/Resource"
    }
   },
-  "undefinedsampleroleDefaultPolicy78972E89": {
+  "sampleroleDefaultPolicy78972E89": {
    "Type": "AWS::IAM::Policy",
    "Properties": {
     "PolicyDocument": {
@@ -164,31 +164,31 @@
        "Resource": [
         {
          "Fn::GetAtt": [
-          "undefinedtpdscomputestackcoreadoptionupdateundefinedtpdscomputestackcoreadoptionupdatesqstolambdaqueue4D279C87",
+          "tpdscomputestackcoreadoptionupdatetpdscomputestackcoreadoptionupdatesqstolambdaqueue4D279C87",
           "Arn"
          ]
         },
         {
          "Fn::GetAtt": [
-          "undefinedtpdscomputestackcorecreditupdatesendcreditundefinedtpdscomputestackcorecreditupdatesendcreditsqstolambdaqueueB1EE4359",
+          "tpdscomputestackcorecreditupdatesendcredittpdscomputestackcorecreditupdatesendcreditsqstolambdaqueueB1EE4359",
           "Arn"
          ]
         },
         {
          "Fn::GetAtt": [
-          "undefinedtpdscomputestackcorereadingscallbackundefinedtpdscomputestackcorereadingscallbacksqstolambdaqueue4E011B1C",
+          "tpdscomputestackcorereadingscallbacktpdscomputestackcorereadingscallbacksqstolambdaqueue4E011B1C",
           "Arn"
          ]
         },
         {
          "Fn::GetAtt": [
-          "undefinedtpdscomputestackcorerequestupdatedispatcherundefinedtpdscomputestackcorerequestupdatedispatchersqstolambdaqueueFCB1C79C",
+          "tpdscomputestackcorerequestupdatedispatchertpdscomputestackcorerequestupdatedispatchersqstolambdaqueueFCB1C79C",
           "Arn"
          ]
         },
         {
          "Fn::GetAtt": [
-          "undefinedtpdscomputestackguruupdateeventcallbackdispatcherundefinedtpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueue65FC0063",
+          "tpdscomputestackguruupdateeventcallbackdispatchertpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueue65FC0063",
           "Arn"
          ]
         }
@@ -198,16 +198,16 @@
        "Action": "kms:Decrypt",
        "Effect": "Allow",
        "Resource": {
-        "Fn::ImportValue": "undefined-sample-sqs-key-export-arn"
+        "Fn::ImportValue": "-sample-sqs-key-export-arn"
        }
       }
      ],
      "Version": "2012-10-17"
     },
-    "PolicyName": "undefinedsampleroleDefaultPolicy78972E89",
+    "PolicyName": "sampleroleDefaultPolicy78972E89",
     "Roles": [
      {
-      "Ref": "undefinedsamplerole619145D4"
+      "Ref": "samplerole619145D4"
      }
     ]
    },
@@ -219,11 +219,11 @@
    "Type": "AWS::ApiGateway::Resource",
    "Properties": {
     "ParentId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-root-resource-id"
+     "Fn::ImportValue": "-sample-export-apig-root-resource-id"
     },
     "PathPart": "device",
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
@@ -238,20 +238,20 @@
     },
     "PathPart": "adopt",
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
     "aws:cdk:path": "sample-stack/my-api/Default/device/adopt/Resource"
    }
   },
-  "myapideviceadoptPOSTApiPermissionundefinedtpdscomputestackmyapi10361850POSTdeviceadopt56658DDC": {
+  "myapideviceadoptPOSTApiPermissiontpdscomputestackmyapi10361850POSTdeviceadopt56658DDC": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
     "FunctionName": {
      "Fn::GetAtt": [
-      "undefinedtpdscomputestackdeviceadoptionundefinedtpdscomputestackdeviceadoptionlambda7773494D",
+      "tpdscomputestackdeviceadoptiontpdscomputestackdeviceadoptionlambda7773494D",
       "Arn"
      ]
     },
@@ -262,7 +262,7 @@
       [
        "arn:aws:execute-api:eu-west-2:202468521054:",
        {
-        "Fn::ImportValue": "undefined-sample-export-apig-id"
+        "Fn::ImportValue": "-sample-export-apig-id"
        },
        "/*/POST/device/adopt"
       ]
@@ -270,16 +270,16 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "sample-stack/my-api/Default/device/adopt/POST/ApiPermission.undefinedtpdscomputestackmyapi10361850.POST..device.adopt"
+    "aws:cdk:path": "sample-stack/my-api/Default/device/adopt/POST/ApiPermission.tpdscomputestackmyapi10361850.POST..device.adopt"
    }
   },
-  "myapideviceadoptPOSTApiPermissionTestundefinedtpdscomputestackmyapi10361850POSTdeviceadopt66E5681D": {
+  "myapideviceadoptPOSTApiPermissionTesttpdscomputestackmyapi10361850POSTdeviceadopt66E5681D": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
     "FunctionName": {
      "Fn::GetAtt": [
-      "undefinedtpdscomputestackdeviceadoptionundefinedtpdscomputestackdeviceadoptionlambda7773494D",
+      "tpdscomputestackdeviceadoptiontpdscomputestackdeviceadoptionlambda7773494D",
       "Arn"
      ]
     },
@@ -290,7 +290,7 @@
       [
        "arn:aws:execute-api:eu-west-2:202468521054:",
        {
-        "Fn::ImportValue": "undefined-sample-export-apig-id"
+        "Fn::ImportValue": "-sample-export-apig-id"
        },
        "/test-invoke-stage/POST/device/adopt"
       ]
@@ -298,7 +298,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "sample-stack/my-api/Default/device/adopt/POST/ApiPermission.Test.undefinedtpdscomputestackmyapi10361850.POST..device.adopt"
+    "aws:cdk:path": "sample-stack/my-api/Default/device/adopt/POST/ApiPermission.Test.tpdscomputestackmyapi10361850.POST..device.adopt"
    }
   },
   "myapideviceadoptPOST160606C0": {
@@ -317,7 +317,7 @@
         "arn:aws:apigateway:eu-west-2:lambda:path/2015-03-31/functions/",
         {
          "Fn::GetAtt": [
-          "undefinedtpdscomputestackdeviceadoptionundefinedtpdscomputestackdeviceadoptionlambda7773494D",
+          "tpdscomputestackdeviceadoptiontpdscomputestackdeviceadoptionlambda7773494D",
           "Arn"
          ]
         },
@@ -344,7 +344,7 @@
      "Ref": "myapideviceadoptB93D5916"
     },
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
@@ -359,7 +359,7 @@
     },
     "PathPart": "status",
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
@@ -374,7 +374,7 @@
     },
     "PathPart": "{manufacturer}",
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
@@ -389,20 +389,20 @@
     },
     "PathPart": "{ppuSerialNumber}",
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
     "aws:cdk:path": "sample-stack/my-api/Default/device/adopt/status/{manufacturer}/{ppuSerialNumber}/Resource"
    }
   },
-  "myapideviceadoptstatusmanufacturerppuSerialNumberGETApiPermissionundefinedtpdscomputestackmyapi10361850GETdeviceadoptstatusmanufacturerppuSerialNumber4F02A500": {
+  "myapideviceadoptstatusmanufacturerppuSerialNumberGETApiPermissiontpdscomputestackmyapi10361850GETdeviceadoptstatusmanufacturerppuSerialNumber4F02A500": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
     "FunctionName": {
      "Fn::GetAtt": [
-      "undefinedtpdscomputestackcoreadoptionstatusundefinedtpdscomputestackcoreadoptionstatuslambda94366C0B",
+      "tpdscomputestackcoreadoptionstatustpdscomputestackcoreadoptionstatuslambda94366C0B",
       "Arn"
      ]
     },
@@ -413,7 +413,7 @@
       [
        "arn:aws:execute-api:eu-west-2:202468521054:",
        {
-        "Fn::ImportValue": "undefined-sample-export-apig-id"
+        "Fn::ImportValue": "-sample-export-apig-id"
        },
        "/*/GET/device/adopt/status/*/*"
       ]
@@ -421,16 +421,16 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "sample-stack/my-api/Default/device/adopt/status/{manufacturer}/{ppuSerialNumber}/GET/ApiPermission.undefinedtpdscomputestackmyapi10361850.GET..device.adopt.status.{manufacturer}.{ppuSerialNumber}"
+    "aws:cdk:path": "sample-stack/my-api/Default/device/adopt/status/{manufacturer}/{ppuSerialNumber}/GET/ApiPermission.tpdscomputestackmyapi10361850.GET..device.adopt.status.{manufacturer}.{ppuSerialNumber}"
    }
   },
-  "myapideviceadoptstatusmanufacturerppuSerialNumberGETApiPermissionTestundefinedtpdscomputestackmyapi10361850GETdeviceadoptstatusmanufacturerppuSerialNumber4CD1A196": {
+  "myapideviceadoptstatusmanufacturerppuSerialNumberGETApiPermissionTesttpdscomputestackmyapi10361850GETdeviceadoptstatusmanufacturerppuSerialNumber4CD1A196": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
     "FunctionName": {
      "Fn::GetAtt": [
-      "undefinedtpdscomputestackcoreadoptionstatusundefinedtpdscomputestackcoreadoptionstatuslambda94366C0B",
+      "tpdscomputestackcoreadoptionstatustpdscomputestackcoreadoptionstatuslambda94366C0B",
       "Arn"
      ]
     },
@@ -441,7 +441,7 @@
       [
        "arn:aws:execute-api:eu-west-2:202468521054:",
        {
-        "Fn::ImportValue": "undefined-sample-export-apig-id"
+        "Fn::ImportValue": "-sample-export-apig-id"
        },
        "/test-invoke-stage/GET/device/adopt/status/*/*"
       ]
@@ -449,7 +449,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "sample-stack/my-api/Default/device/adopt/status/{manufacturer}/{ppuSerialNumber}/GET/ApiPermission.Test.undefinedtpdscomputestackmyapi10361850.GET..device.adopt.status.{manufacturer}.{ppuSerialNumber}"
+    "aws:cdk:path": "sample-stack/my-api/Default/device/adopt/status/{manufacturer}/{ppuSerialNumber}/GET/ApiPermission.Test.tpdscomputestackmyapi10361850.GET..device.adopt.status.{manufacturer}.{ppuSerialNumber}"
    }
   },
   "myapideviceadoptstatusmanufacturerppuSerialNumberGET3DA2F142": {
@@ -468,7 +468,7 @@
         "arn:aws:apigateway:eu-west-2:lambda:path/2015-03-31/functions/",
         {
          "Fn::GetAtt": [
-          "undefinedtpdscomputestackcoreadoptionstatusundefinedtpdscomputestackcoreadoptionstatuslambda94366C0B",
+          "tpdscomputestackcoreadoptionstatustpdscomputestackcoreadoptionstatuslambda94366C0B",
           "Arn"
          ]
         },
@@ -495,7 +495,7 @@
      "Ref": "myapideviceadoptstatusmanufacturerppuSerialNumber22B29391"
     },
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
@@ -510,20 +510,20 @@
     },
     "PathPart": "direct-read",
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
     "aws:cdk:path": "sample-stack/my-api/Default/device/direct-read/Resource"
    }
   },
-  "myapidevicedirectreadPOSTApiPermissionundefinedtpdscomputestackmyapi10361850POSTdevicedirectreadC8FAD9F5": {
+  "myapidevicedirectreadPOSTApiPermissiontpdscomputestackmyapi10361850POSTdevicedirectreadC8FAD9F5": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
     "FunctionName": {
      "Fn::GetAtt": [
-      "undefinedtpdscomputestackcorereadingsdirectreadundefinedtpdscomputestackcorereadingsdirectreadlambda081748C4",
+      "tpdscomputestackcorereadingsdirectreadtpdscomputestackcorereadingsdirectreadlambda081748C4",
       "Arn"
      ]
     },
@@ -534,7 +534,7 @@
       [
        "arn:aws:execute-api:eu-west-2:202468521054:",
        {
-        "Fn::ImportValue": "undefined-sample-export-apig-id"
+        "Fn::ImportValue": "-sample-export-apig-id"
        },
        "/*/POST/device/direct-read"
       ]
@@ -542,16 +542,16 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "sample-stack/my-api/Default/device/direct-read/POST/ApiPermission.undefinedtpdscomputestackmyapi10361850.POST..device.direct-read"
+    "aws:cdk:path": "sample-stack/my-api/Default/device/direct-read/POST/ApiPermission.tpdscomputestackmyapi10361850.POST..device.direct-read"
    }
   },
-  "myapidevicedirectreadPOSTApiPermissionTestundefinedtpdscomputestackmyapi10361850POSTdevicedirectreadD6F3EFB6": {
+  "myapidevicedirectreadPOSTApiPermissionTesttpdscomputestackmyapi10361850POSTdevicedirectreadD6F3EFB6": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
     "FunctionName": {
      "Fn::GetAtt": [
-      "undefinedtpdscomputestackcorereadingsdirectreadundefinedtpdscomputestackcorereadingsdirectreadlambda081748C4",
+      "tpdscomputestackcorereadingsdirectreadtpdscomputestackcorereadingsdirectreadlambda081748C4",
       "Arn"
      ]
     },
@@ -562,7 +562,7 @@
       [
        "arn:aws:execute-api:eu-west-2:202468521054:",
        {
-        "Fn::ImportValue": "undefined-sample-export-apig-id"
+        "Fn::ImportValue": "-sample-export-apig-id"
        },
        "/test-invoke-stage/POST/device/direct-read"
       ]
@@ -570,7 +570,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "sample-stack/my-api/Default/device/direct-read/POST/ApiPermission.Test.undefinedtpdscomputestackmyapi10361850.POST..device.direct-read"
+    "aws:cdk:path": "sample-stack/my-api/Default/device/direct-read/POST/ApiPermission.Test.tpdscomputestackmyapi10361850.POST..device.direct-read"
    }
   },
   "myapidevicedirectreadPOSTBCABEC17": {
@@ -589,7 +589,7 @@
         "arn:aws:apigateway:eu-west-2:lambda:path/2015-03-31/functions/",
         {
          "Fn::GetAtt": [
-          "undefinedtpdscomputestackcorereadingsdirectreadundefinedtpdscomputestackcorereadingsdirectreadlambda081748C4",
+          "tpdscomputestackcorereadingsdirectreadtpdscomputestackcorereadingsdirectreadlambda081748C4",
           "Arn"
          ]
         },
@@ -616,7 +616,7 @@
      "Ref": "myapidevicedirectreadB5851CED"
     },
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
@@ -631,20 +631,20 @@
     },
     "PathPart": "credit",
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
     "aws:cdk:path": "sample-stack/my-api/Default/device/credit/Resource"
    }
   },
-  "myapidevicecreditPOSTApiPermissionundefinedtpdscomputestackmyapi10361850POSTdevicecredit3510D036": {
+  "myapidevicecreditPOSTApiPermissiontpdscomputestackmyapi10361850POSTdevicecredit3510D036": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
     "FunctionName": {
      "Fn::GetAtt": [
-      "undefinedtpdscomputestackcorecreditsendundefinedtpdscomputestackcorecreditsendlambdaEFB630CE",
+      "tpdscomputestackcorecreditsendtpdscomputestackcorecreditsendlambdaEFB630CE",
       "Arn"
      ]
     },
@@ -655,7 +655,7 @@
       [
        "arn:aws:execute-api:eu-west-2:202468521054:",
        {
-        "Fn::ImportValue": "undefined-sample-export-apig-id"
+        "Fn::ImportValue": "-sample-export-apig-id"
        },
        "/*/POST/device/credit"
       ]
@@ -663,16 +663,16 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "sample-stack/my-api/Default/device/credit/POST/ApiPermission.undefinedtpdscomputestackmyapi10361850.POST..device.credit"
+    "aws:cdk:path": "sample-stack/my-api/Default/device/credit/POST/ApiPermission.tpdscomputestackmyapi10361850.POST..device.credit"
    }
   },
-  "myapidevicecreditPOSTApiPermissionTestundefinedtpdscomputestackmyapi10361850POSTdevicecredit8BB0D46F": {
+  "myapidevicecreditPOSTApiPermissionTesttpdscomputestackmyapi10361850POSTdevicecredit8BB0D46F": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
     "FunctionName": {
      "Fn::GetAtt": [
-      "undefinedtpdscomputestackcorecreditsendundefinedtpdscomputestackcorecreditsendlambdaEFB630CE",
+      "tpdscomputestackcorecreditsendtpdscomputestackcorecreditsendlambdaEFB630CE",
       "Arn"
      ]
     },
@@ -683,7 +683,7 @@
       [
        "arn:aws:execute-api:eu-west-2:202468521054:",
        {
-        "Fn::ImportValue": "undefined-sample-export-apig-id"
+        "Fn::ImportValue": "-sample-export-apig-id"
        },
        "/test-invoke-stage/POST/device/credit"
       ]
@@ -691,7 +691,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "sample-stack/my-api/Default/device/credit/POST/ApiPermission.Test.undefinedtpdscomputestackmyapi10361850.POST..device.credit"
+    "aws:cdk:path": "sample-stack/my-api/Default/device/credit/POST/ApiPermission.Test.tpdscomputestackmyapi10361850.POST..device.credit"
    }
   },
   "myapidevicecreditPOSTE2593D18": {
@@ -710,7 +710,7 @@
         "arn:aws:apigateway:eu-west-2:lambda:path/2015-03-31/functions/",
         {
          "Fn::GetAtt": [
-          "undefinedtpdscomputestackcorecreditsendundefinedtpdscomputestackcorecreditsendlambdaEFB630CE",
+          "tpdscomputestackcorecreditsendtpdscomputestackcorecreditsendlambdaEFB630CE",
           "Arn"
          ]
         },
@@ -737,7 +737,7 @@
      "Ref": "myapidevicecreditF4D49882"
     },
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
@@ -752,7 +752,7 @@
     },
     "PathPart": "consumer",
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
@@ -767,20 +767,20 @@
     },
     "PathPart": "configuration",
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
     "aws:cdk:path": "sample-stack/my-api/Default/device/consumer/configuration/Resource"
    }
   },
-  "myapideviceconsumerconfigurationPOSTApiPermissionundefinedtpdscomputestackmyapi10361850POSTdeviceconsumerconfigurationE4FA8526": {
+  "myapideviceconsumerconfigurationPOSTApiPermissiontpdscomputestackmyapi10361850POSTdeviceconsumerconfigurationE4FA8526": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
     "FunctionName": {
      "Fn::GetAtt": [
-      "undefinedtpdscomputestackcoreconfigureconsumerundefinedtpdscomputestackcoreconfigureconsumerlambda97A4BEAD",
+      "tpdscomputestackcoreconfigureconsumertpdscomputestackcoreconfigureconsumerlambda97A4BEAD",
       "Arn"
      ]
     },
@@ -791,7 +791,7 @@
       [
        "arn:aws:execute-api:eu-west-2:202468521054:",
        {
-        "Fn::ImportValue": "undefined-sample-export-apig-id"
+        "Fn::ImportValue": "-sample-export-apig-id"
        },
        "/*/POST/device/consumer/configuration"
       ]
@@ -799,16 +799,16 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "sample-stack/my-api/Default/device/consumer/configuration/POST/ApiPermission.undefinedtpdscomputestackmyapi10361850.POST..device.consumer.configuration"
+    "aws:cdk:path": "sample-stack/my-api/Default/device/consumer/configuration/POST/ApiPermission.tpdscomputestackmyapi10361850.POST..device.consumer.configuration"
    }
   },
-  "myapideviceconsumerconfigurationPOSTApiPermissionTestundefinedtpdscomputestackmyapi10361850POSTdeviceconsumerconfiguration0DC92DC4": {
+  "myapideviceconsumerconfigurationPOSTApiPermissionTesttpdscomputestackmyapi10361850POSTdeviceconsumerconfiguration0DC92DC4": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
     "FunctionName": {
      "Fn::GetAtt": [
-      "undefinedtpdscomputestackcoreconfigureconsumerundefinedtpdscomputestackcoreconfigureconsumerlambda97A4BEAD",
+      "tpdscomputestackcoreconfigureconsumertpdscomputestackcoreconfigureconsumerlambda97A4BEAD",
       "Arn"
      ]
     },
@@ -819,7 +819,7 @@
       [
        "arn:aws:execute-api:eu-west-2:202468521054:",
        {
-        "Fn::ImportValue": "undefined-sample-export-apig-id"
+        "Fn::ImportValue": "-sample-export-apig-id"
        },
        "/test-invoke-stage/POST/device/consumer/configuration"
       ]
@@ -827,7 +827,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "sample-stack/my-api/Default/device/consumer/configuration/POST/ApiPermission.Test.undefinedtpdscomputestackmyapi10361850.POST..device.consumer.configuration"
+    "aws:cdk:path": "sample-stack/my-api/Default/device/consumer/configuration/POST/ApiPermission.Test.tpdscomputestackmyapi10361850.POST..device.consumer.configuration"
    }
   },
   "myapideviceconsumerconfigurationPOST5585043B": {
@@ -846,7 +846,7 @@
         "arn:aws:apigateway:eu-west-2:lambda:path/2015-03-31/functions/",
         {
          "Fn::GetAtt": [
-          "undefinedtpdscomputestackcoreconfigureconsumerundefinedtpdscomputestackcoreconfigureconsumerlambda97A4BEAD",
+          "tpdscomputestackcoreconfigureconsumertpdscomputestackcoreconfigureconsumerlambda97A4BEAD",
           "Arn"
          ]
         },
@@ -873,7 +873,7 @@
      "Ref": "myapideviceconsumerconfiguration8FF9CE92"
     },
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
@@ -888,20 +888,20 @@
     },
     "PathPart": "status",
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
     "aws:cdk:path": "sample-stack/my-api/Default/device/status/Resource"
    }
   },
-  "myapidevicestatusPOSTApiPermissionundefinedtpdscomputestackmyapi10361850POSTdevicestatus700F63BF": {
+  "myapidevicestatusPOSTApiPermissiontpdscomputestackmyapi10361850POSTdevicestatus700F63BF": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
     "FunctionName": {
      "Fn::GetAtt": [
-      "undefinedtpdscomputestackcoredevicestatushandlerundefinedtpdscomputestackcoredevicestatushandlerlambdaDDDD01B1",
+      "tpdscomputestackcoredevicestatushandlertpdscomputestackcoredevicestatushandlerlambdaDDDD01B1",
       "Arn"
      ]
     },
@@ -912,7 +912,7 @@
       [
        "arn:aws:execute-api:eu-west-2:202468521054:",
        {
-        "Fn::ImportValue": "undefined-sample-export-apig-id"
+        "Fn::ImportValue": "-sample-export-apig-id"
        },
        "/*/POST/device/status"
       ]
@@ -920,16 +920,16 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "sample-stack/my-api/Default/device/status/POST/ApiPermission.undefinedtpdscomputestackmyapi10361850.POST..device.status"
+    "aws:cdk:path": "sample-stack/my-api/Default/device/status/POST/ApiPermission.tpdscomputestackmyapi10361850.POST..device.status"
    }
   },
-  "myapidevicestatusPOSTApiPermissionTestundefinedtpdscomputestackmyapi10361850POSTdevicestatus4AD0E7EF": {
+  "myapidevicestatusPOSTApiPermissionTesttpdscomputestackmyapi10361850POSTdevicestatus4AD0E7EF": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
     "FunctionName": {
      "Fn::GetAtt": [
-      "undefinedtpdscomputestackcoredevicestatushandlerundefinedtpdscomputestackcoredevicestatushandlerlambdaDDDD01B1",
+      "tpdscomputestackcoredevicestatushandlertpdscomputestackcoredevicestatushandlerlambdaDDDD01B1",
       "Arn"
      ]
     },
@@ -940,7 +940,7 @@
       [
        "arn:aws:execute-api:eu-west-2:202468521054:",
        {
-        "Fn::ImportValue": "undefined-sample-export-apig-id"
+        "Fn::ImportValue": "-sample-export-apig-id"
        },
        "/test-invoke-stage/POST/device/status"
       ]
@@ -948,7 +948,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "sample-stack/my-api/Default/device/status/POST/ApiPermission.Test.undefinedtpdscomputestackmyapi10361850.POST..device.status"
+    "aws:cdk:path": "sample-stack/my-api/Default/device/status/POST/ApiPermission.Test.tpdscomputestackmyapi10361850.POST..device.status"
    }
   },
   "myapidevicestatusPOST8FCC0269": {
@@ -967,7 +967,7 @@
         "arn:aws:apigateway:eu-west-2:lambda:path/2015-03-31/functions/",
         {
          "Fn::GetAtt": [
-          "undefinedtpdscomputestackcoredevicestatushandlerundefinedtpdscomputestackcoredevicestatushandlerlambdaDDDD01B1",
+          "tpdscomputestackcoredevicestatushandlertpdscomputestackcoredevicestatushandlerlambdaDDDD01B1",
           "Arn"
          ]
         },
@@ -994,7 +994,7 @@
      "Ref": "myapidevicestatus18B4DF90"
     },
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
@@ -1005,11 +1005,11 @@
    "Type": "AWS::ApiGateway::Resource",
    "Properties": {
     "ParentId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-root-resource-id"
+     "Fn::ImportValue": "-sample-export-apig-root-resource-id"
     },
     "PathPart": "update",
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
@@ -1024,20 +1024,20 @@
     },
     "PathPart": "event",
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
     "aws:cdk:path": "sample-stack/my-api/Default/update/event/Resource"
    }
   },
-  "myapiupdateeventPOSTApiPermissionundefinedtpdscomputestackmyapi10361850POSTupdateeventC7C5D858": {
+  "myapiupdateeventPOSTApiPermissiontpdscomputestackmyapi10361850POSTupdateeventC7C5D858": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
     "FunctionName": {
      "Fn::GetAtt": [
-      "undefinedtpdscomputestackcoreupdateeventhandlerundefinedtpdscomputestackcoreupdateeventhandlerlambda909B0018",
+      "tpdscomputestackcoreupdateeventhandlertpdscomputestackcoreupdateeventhandlerlambda909B0018",
       "Arn"
      ]
     },
@@ -1048,7 +1048,7 @@
       [
        "arn:aws:execute-api:eu-west-2:202468521054:",
        {
-        "Fn::ImportValue": "undefined-sample-export-apig-id"
+        "Fn::ImportValue": "-sample-export-apig-id"
        },
        "/*/POST/update/event"
       ]
@@ -1056,16 +1056,16 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "sample-stack/my-api/Default/update/event/POST/ApiPermission.undefinedtpdscomputestackmyapi10361850.POST..update.event"
+    "aws:cdk:path": "sample-stack/my-api/Default/update/event/POST/ApiPermission.tpdscomputestackmyapi10361850.POST..update.event"
    }
   },
-  "myapiupdateeventPOSTApiPermissionTestundefinedtpdscomputestackmyapi10361850POSTupdateevent51F35FF6": {
+  "myapiupdateeventPOSTApiPermissionTesttpdscomputestackmyapi10361850POSTupdateevent51F35FF6": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
     "FunctionName": {
      "Fn::GetAtt": [
-      "undefinedtpdscomputestackcoreupdateeventhandlerundefinedtpdscomputestackcoreupdateeventhandlerlambda909B0018",
+      "tpdscomputestackcoreupdateeventhandlertpdscomputestackcoreupdateeventhandlerlambda909B0018",
       "Arn"
      ]
     },
@@ -1076,7 +1076,7 @@
       [
        "arn:aws:execute-api:eu-west-2:202468521054:",
        {
-        "Fn::ImportValue": "undefined-sample-export-apig-id"
+        "Fn::ImportValue": "-sample-export-apig-id"
        },
        "/test-invoke-stage/POST/update/event"
       ]
@@ -1084,7 +1084,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "sample-stack/my-api/Default/update/event/POST/ApiPermission.Test.undefinedtpdscomputestackmyapi10361850.POST..update.event"
+    "aws:cdk:path": "sample-stack/my-api/Default/update/event/POST/ApiPermission.Test.tpdscomputestackmyapi10361850.POST..update.event"
    }
   },
   "myapiupdateeventPOSTE89EC8D3": {
@@ -1103,7 +1103,7 @@
         "arn:aws:apigateway:eu-west-2:lambda:path/2015-03-31/functions/",
         {
          "Fn::GetAtt": [
-          "undefinedtpdscomputestackcoreupdateeventhandlerundefinedtpdscomputestackcoreupdateeventhandlerlambda909B0018",
+          "tpdscomputestackcoreupdateeventhandlertpdscomputestackcoreupdateeventhandlerlambda909B0018",
           "Arn"
          ]
         },
@@ -1130,7 +1130,7 @@
      "Ref": "myapiupdateevent9B59807F"
     },
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
@@ -1145,7 +1145,7 @@
     },
     "PathPart": "status",
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
@@ -1160,20 +1160,20 @@
     },
     "PathPart": "{guid}",
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
     "aws:cdk:path": "sample-stack/my-api/Default/update/status/{guid}/Resource"
    }
   },
-  "myapiupdatestatusguidGETApiPermissionundefinedtpdscomputestackmyapi10361850GETupdatestatusguid6330A180": {
+  "myapiupdatestatusguidGETApiPermissiontpdscomputestackmyapi10361850GETupdatestatusguid6330A180": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
     "FunctionName": {
      "Fn::GetAtt": [
-      "undefinedtpdscomputestackcorerequestprogressstatusundefinedtpdscomputestackcorerequestprogressstatuslambda532A76D3",
+      "tpdscomputestackcorerequestprogressstatustpdscomputestackcorerequestprogressstatuslambda532A76D3",
       "Arn"
      ]
     },
@@ -1184,7 +1184,7 @@
       [
        "arn:aws:execute-api:eu-west-2:202468521054:",
        {
-        "Fn::ImportValue": "undefined-sample-export-apig-id"
+        "Fn::ImportValue": "-sample-export-apig-id"
        },
        "/*/GET/update/status/*"
       ]
@@ -1192,16 +1192,16 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "sample-stack/my-api/Default/update/status/{guid}/GET/ApiPermission.undefinedtpdscomputestackmyapi10361850.GET..update.status.{guid}"
+    "aws:cdk:path": "sample-stack/my-api/Default/update/status/{guid}/GET/ApiPermission.tpdscomputestackmyapi10361850.GET..update.status.{guid}"
    }
   },
-  "myapiupdatestatusguidGETApiPermissionTestundefinedtpdscomputestackmyapi10361850GETupdatestatusguidB27B8F7B": {
+  "myapiupdatestatusguidGETApiPermissionTesttpdscomputestackmyapi10361850GETupdatestatusguidB27B8F7B": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
     "FunctionName": {
      "Fn::GetAtt": [
-      "undefinedtpdscomputestackcorerequestprogressstatusundefinedtpdscomputestackcorerequestprogressstatuslambda532A76D3",
+      "tpdscomputestackcorerequestprogressstatustpdscomputestackcorerequestprogressstatuslambda532A76D3",
       "Arn"
      ]
     },
@@ -1212,7 +1212,7 @@
       [
        "arn:aws:execute-api:eu-west-2:202468521054:",
        {
-        "Fn::ImportValue": "undefined-sample-export-apig-id"
+        "Fn::ImportValue": "-sample-export-apig-id"
        },
        "/test-invoke-stage/GET/update/status/*"
       ]
@@ -1220,7 +1220,7 @@
     }
    },
    "Metadata": {
-    "aws:cdk:path": "sample-stack/my-api/Default/update/status/{guid}/GET/ApiPermission.Test.undefinedtpdscomputestackmyapi10361850.GET..update.status.{guid}"
+    "aws:cdk:path": "sample-stack/my-api/Default/update/status/{guid}/GET/ApiPermission.Test.tpdscomputestackmyapi10361850.GET..update.status.{guid}"
    }
   },
   "myapiupdatestatusguidGETE6712722": {
@@ -1239,7 +1239,7 @@
         "arn:aws:apigateway:eu-west-2:lambda:path/2015-03-31/functions/",
         {
          "Fn::GetAtt": [
-          "undefinedtpdscomputestackcorerequestprogressstatusundefinedtpdscomputestackcorerequestprogressstatuslambda532A76D3",
+          "tpdscomputestackcorerequestprogressstatustpdscomputestackcorerequestprogressstatuslambda532A76D3",
           "Arn"
          ]
         },
@@ -1266,7 +1266,7 @@
      "Ref": "myapiupdatestatusguid28FFBBE0"
     },
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
@@ -1277,11 +1277,11 @@
    "Type": "AWS::ApiGateway::Resource",
    "Properties": {
     "ParentId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-root-resource-id"
+     "Fn::ImportValue": "-sample-export-apig-root-resource-id"
     },
     "PathPart": "readings",
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
@@ -1296,7 +1296,7 @@
     },
     "PathPart": "events",
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
@@ -1312,7 +1312,7 @@
     "Integration": {
      "Credentials": {
       "Fn::GetAtt": [
-       "undefinedtpdscomputestackcorereadingscallbacksqsroleundefinedtpdscomputestackcorereadingscallback3B43A8F2",
+       "tpdscomputestackcorereadingscallbacksqsroletpdscomputestackcorereadingscallback3B43A8F2",
        "Arn"
       ]
      },
@@ -1342,7 +1342,7 @@
         "arn:aws:apigateway:eu-west-2:sqs:path/202468521054/",
         {
          "Fn::GetAtt": [
-          "undefinedtpdscomputestackcorereadingscallbackundefinedtpdscomputestackcorereadingscallbacksqstolambdaqueue4E011B1C",
+          "tpdscomputestackcorereadingscallbacktpdscomputestackcorereadingscallbacksqstolambdaqueue4E011B1C",
           "QueueName"
          ]
         }
@@ -1368,14 +1368,14 @@
      "Ref": "myapireadingsevents50AEB3F4"
     },
     "RestApiId": {
-     "Fn::ImportValue": "undefined-sample-export-apig-id"
+     "Fn::ImportValue": "-sample-export-apig-id"
     }
    },
    "Metadata": {
     "aws:cdk:path": "sample-stack/my-api/Default/readings/events/POST/Resource"
    }
   },
-  "undefinedtpdscomputestackdeviceadoptionundefinedtpdscomputestackdeviceadoptionlambda7773494D": {
+  "tpdscomputestackdeviceadoptiontpdscomputestackdeviceadoptionlambda7773494D": {
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Architectures": [
@@ -1391,11 +1391,11 @@
       "region": "eu-west-2"
      }
     },
-    "FunctionName": "undefined-sample-core-adoption",
+    "FunctionName": "-sample-core-adoption",
     "Handler": "bootstrap",
     "Role": {
      "Fn::GetAtt": [
-      "undefinedsamplerole619145D4",
+      "samplerole619145D4",
       "Arn"
      ]
     },
@@ -1406,9 +1406,9 @@
     }
    },
    "DependsOn": [
-    "undefinedsampleroleDefaultPolicy78972E89",
-    "undefinedsamplerole619145D4",
-    "undefinedsampleroleundefinedsamplepolicy1CAB6B24"
+    "sampleroleDefaultPolicy78972E89",
+    "samplerole619145D4",
+    "samplerolesamplepolicy1CAB6B24"
    ],
    "Metadata": {
     "aws:cdk:path": "sample-stack/sample-stack-device-adoption/sample-stack-device-adoption-lambda/Resource",
@@ -1417,7 +1417,7 @@
     "aws:asset:property": "Code"
    }
   },
-  "undefinedtpdscomputestackdeviceadoptionundefinedtpdscomputestackdeviceadoptionalarm153F8EDC": {
+  "tpdscomputestackdeviceadoptiontpdscomputestackdeviceadoptionalarm153F8EDC": {
    "Type": "AWS::CloudWatch::Alarm",
    "Properties": {
     "AlarmActions": [
@@ -1430,7 +1430,7 @@
      {
       "Name": "FunctionName",
       "Value": {
-       "Ref": "undefinedtpdscomputestackdeviceadoptionundefinedtpdscomputestackdeviceadoptionlambda7773494D"
+       "Ref": "tpdscomputestackdeviceadoptiontpdscomputestackdeviceadoptionlambda7773494D"
       }
      }
     ],
@@ -1445,7 +1445,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-device-adoption/sample-stack-device-adoption-alarm/Resource"
    }
   },
-  "undefinedtpdscomputestackcorereadingsdirectreadundefinedtpdscomputestackcorereadingsdirectreadlambda081748C4": {
+  "tpdscomputestackcorereadingsdirectreadtpdscomputestackcorereadingsdirectreadlambda081748C4": {
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Architectures": [
@@ -1461,11 +1461,11 @@
       "region": "eu-west-2"
      }
     },
-    "FunctionName": "undefined-sample-core-readings-direct-read",
+    "FunctionName": "-sample-core-readings-direct-read",
     "Handler": "bootstrap",
     "Role": {
      "Fn::GetAtt": [
-      "undefinedsamplerole619145D4",
+      "samplerole619145D4",
       "Arn"
      ]
     },
@@ -1476,9 +1476,9 @@
     }
    },
    "DependsOn": [
-    "undefinedsampleroleDefaultPolicy78972E89",
-    "undefinedsamplerole619145D4",
-    "undefinedsampleroleundefinedsamplepolicy1CAB6B24"
+    "sampleroleDefaultPolicy78972E89",
+    "samplerole619145D4",
+    "samplerolesamplepolicy1CAB6B24"
    ],
    "Metadata": {
     "aws:cdk:path": "sample-stack/sample-stack-core-readings-direct-read/sample-stack-core-readings-direct-read-lambda/Resource",
@@ -1487,7 +1487,7 @@
     "aws:asset:property": "Code"
    }
   },
-  "undefinedtpdscomputestackcorereadingsdirectreadundefinedtpdscomputestackcorereadingsdirectreadalarm59CD52A6": {
+  "tpdscomputestackcorereadingsdirectreadtpdscomputestackcorereadingsdirectreadalarm59CD52A6": {
    "Type": "AWS::CloudWatch::Alarm",
    "Properties": {
     "AlarmActions": [
@@ -1500,7 +1500,7 @@
      {
       "Name": "FunctionName",
       "Value": {
-       "Ref": "undefinedtpdscomputestackcorereadingsdirectreadundefinedtpdscomputestackcorereadingsdirectreadlambda081748C4"
+       "Ref": "tpdscomputestackcorereadingsdirectreadtpdscomputestackcorereadingsdirectreadlambda081748C4"
       }
      }
     ],
@@ -1515,7 +1515,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-readings-direct-read/sample-stack-core-readings-direct-read-alarm/Resource"
    }
   },
-  "undefinedtpdscomputestackcoreupdateeventhandlerundefinedtpdscomputestackcoreupdateeventhandlerlambda909B0018": {
+  "tpdscomputestackcoreupdateeventhandlertpdscomputestackcoreupdateeventhandlerlambda909B0018": {
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Architectures": [
@@ -1530,15 +1530,15 @@
       "account": "202468521054",
       "region": "eu-west-2",
       "EVENT_BUS_NAME": {
-       "Fn::ImportValue": "undefined-sample-eventbus-export-name"
+       "Fn::ImportValue": "-sample-eventbus-export-name"
       }
      }
     },
-    "FunctionName": "undefined-sample-update-event-handler",
+    "FunctionName": "-sample-update-event-handler",
     "Handler": "bootstrap",
     "Role": {
      "Fn::GetAtt": [
-      "undefinedsamplerole619145D4",
+      "samplerole619145D4",
       "Arn"
      ]
     },
@@ -1549,9 +1549,9 @@
     }
    },
    "DependsOn": [
-    "undefinedsampleroleDefaultPolicy78972E89",
-    "undefinedsamplerole619145D4",
-    "undefinedsampleroleundefinedsamplepolicy1CAB6B24"
+    "sampleroleDefaultPolicy78972E89",
+    "samplerole619145D4",
+    "samplerolesamplepolicy1CAB6B24"
    ],
    "Metadata": {
     "aws:cdk:path": "sample-stack/sample-stack-core-update-event-handler/sample-stack-core-update-event-handler-lambda/Resource",
@@ -1560,7 +1560,7 @@
     "aws:asset:property": "Code"
    }
   },
-  "undefinedtpdscomputestackcoreupdateeventhandlerundefinedtpdscomputestackcoreupdateeventhandleralarm33C6F5F8": {
+  "tpdscomputestackcoreupdateeventhandlertpdscomputestackcoreupdateeventhandleralarm33C6F5F8": {
    "Type": "AWS::CloudWatch::Alarm",
    "Properties": {
     "AlarmActions": [
@@ -1573,7 +1573,7 @@
      {
       "Name": "FunctionName",
       "Value": {
-       "Ref": "undefinedtpdscomputestackcoreupdateeventhandlerundefinedtpdscomputestackcoreupdateeventhandlerlambda909B0018"
+       "Ref": "tpdscomputestackcoreupdateeventhandlertpdscomputestackcoreupdateeventhandlerlambda909B0018"
       }
      }
     ],
@@ -1588,7 +1588,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-update-event-handler/sample-stack-core-update-event-handler-alarm/Resource"
    }
   },
-  "undefinedtpdscomputestackguruupdateeventcallbackdispatcherundefinedtpdscomputestackguruupdateeventcallbackdispatcherlambda5B122878": {
+  "tpdscomputestackguruupdateeventcallbackdispatchertpdscomputestackguruupdateeventcallbackdispatcherlambda5B122878": {
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Architectures": [
@@ -1604,11 +1604,11 @@
       "region": "eu-west-2"
      }
     },
-    "FunctionName": "undefined-sample-update-event-callback-dispatcher",
+    "FunctionName": "-sample-update-event-callback-dispatcher",
     "Handler": "bootstrap",
     "Role": {
      "Fn::GetAtt": [
-      "undefinedsamplerole619145D4",
+      "samplerole619145D4",
       "Arn"
      ]
     },
@@ -1619,9 +1619,9 @@
     }
    },
    "DependsOn": [
-    "undefinedsampleroleDefaultPolicy78972E89",
-    "undefinedsamplerole619145D4",
-    "undefinedsampleroleundefinedsamplepolicy1CAB6B24"
+    "sampleroleDefaultPolicy78972E89",
+    "samplerole619145D4",
+    "samplerolesamplepolicy1CAB6B24"
    ],
    "Metadata": {
     "aws:cdk:path": "sample-stack/sample-stack-guru-update-event-callback-dispatcher/sample-stack-guru-update-event-callback-dispatcher-lambda/Resource",
@@ -1630,28 +1630,28 @@
     "aws:asset:property": "Code"
    }
   },
-  "undefinedtpdscomputestackguruupdateeventcallbackdispatcherundefinedtpdscomputestackguruupdateeventcallbackdispatcherlambdaSqsEventSourceundefinedtpdscomputestackundefinedtpdscomputestackguruupdateeventcallbackdispatcherundefinedtpdscomputes67B993A9": {
+  "tpdscomputestackguruupdateeventcallbackdispatchertpdscomputestackguruupdateeventcallbackdispatcherlambdaSqsEventSourcetpdscomputestacktpdscomputestackguruupdateeventcallbackdispatchertpdscomputes67B993A9": {
    "Type": "AWS::Lambda::EventSourceMapping",
    "Properties": {
     "EventSourceArn": {
      "Fn::GetAtt": [
-      "undefinedtpdscomputestackguruupdateeventcallbackdispatcherundefinedtpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueue65FC0063",
+      "tpdscomputestackguruupdateeventcallbackdispatchertpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueue65FC0063",
       "Arn"
      ]
     },
     "FunctionName": {
-     "Ref": "undefinedtpdscomputestackguruupdateeventcallbackdispatcherundefinedtpdscomputestackguruupdateeventcallbackdispatcherlambda5B122878"
+     "Ref": "tpdscomputestackguruupdateeventcallbackdispatchertpdscomputestackguruupdateeventcallbackdispatcherlambda5B122878"
     }
    },
    "Metadata": {
-    "aws:cdk:path": "sample-stack/sample-stack-guru-update-event-callback-dispatcher/sample-stack-guru-update-event-callback-dispatcher-lambda/SqsEventSource:undefinedtpdscomputestackundefinedtpdscomputestackguruupdateeventcallbackdispatcherundefinedtpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueueE0BDDC01/Resource"
+    "aws:cdk:path": "sample-stack/sample-stack-guru-update-event-callback-dispatcher/sample-stack-guru-update-event-callback-dispatcher-lambda/SqsEventSource:tpdscomputestacktpdscomputestackguruupdateeventcallbackdispatchertpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueueE0BDDC01/Resource"
    }
   },
-  "undefinedtpdscomputestackguruupdateeventcallbackdispatcherundefinedtpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueuedlq5ED125CE": {
+  "tpdscomputestackguruupdateeventcallbackdispatchertpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueuedlq5ED125CE": {
    "Type": "AWS::SQS::Queue",
    "Properties": {
     "KmsMasterKeyId": {
-     "Fn::ImportValue": "undefined-sample-sqs-key-export-arn"
+     "Fn::ImportValue": "-sample-sqs-key-export-arn"
     },
     "MessageRetentionPeriod": 1209600,
     "QueueName": "sample-stack-guru-update-event-callback-dispatcher-queue-dlq"
@@ -1662,7 +1662,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-guru-update-event-callback-dispatcher/sample-stack-guru-update-event-callback-dispatcher-sqs-to-lambda/queue-dlq/Resource"
    }
   },
-  "undefinedtpdscomputestackguruupdateeventcallbackdispatcherundefinedtpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueuedlqPolicyE7A74F48": {
+  "tpdscomputestackguruupdateeventcallbackdispatchertpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueuedlqPolicyE7A74F48": {
    "Type": "AWS::SQS::QueuePolicy",
    "Properties": {
     "PolicyDocument": {
@@ -1683,7 +1683,7 @@
        },
        "Resource": {
         "Fn::GetAtt": [
-         "undefinedtpdscomputestackguruupdateeventcallbackdispatcherundefinedtpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueuedlq5ED125CE",
+         "tpdscomputestackguruupdateeventcallbackdispatchertpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueuedlq5ED125CE",
          "Arn"
         ]
        },
@@ -1702,7 +1702,7 @@
        },
        "Resource": {
         "Fn::GetAtt": [
-         "undefinedtpdscomputestackguruupdateeventcallbackdispatcherundefinedtpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueuedlq5ED125CE",
+         "tpdscomputestackguruupdateeventcallbackdispatchertpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueuedlq5ED125CE",
          "Arn"
         ]
        },
@@ -1713,7 +1713,7 @@
     },
     "Queues": [
      {
-      "Ref": "undefinedtpdscomputestackguruupdateeventcallbackdispatcherundefinedtpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueuedlq5ED125CE"
+      "Ref": "tpdscomputestackguruupdateeventcallbackdispatchertpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueuedlq5ED125CE"
      }
     ]
    },
@@ -1721,11 +1721,11 @@
     "aws:cdk:path": "sample-stack/sample-stack-guru-update-event-callback-dispatcher/sample-stack-guru-update-event-callback-dispatcher-sqs-to-lambda/queue-dlq/Policy/Resource"
    }
   },
-  "undefinedtpdscomputestackguruupdateeventcallbackdispatcherundefinedtpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueue65FC0063": {
+  "tpdscomputestackguruupdateeventcallbackdispatchertpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueue65FC0063": {
    "Type": "AWS::SQS::Queue",
    "Properties": {
     "KmsMasterKeyId": {
-     "Fn::ImportValue": "undefined-sample-sqs-key-export-arn"
+     "Fn::ImportValue": "-sample-sqs-key-export-arn"
     },
     "MessageRetentionPeriod": 1209600,
     "QueueName": "sample-stack-guru-update-event-callback-dispatcher-queue",
@@ -1733,7 +1733,7 @@
     "RedrivePolicy": {
      "deadLetterTargetArn": {
       "Fn::GetAtt": [
-       "undefinedtpdscomputestackguruupdateeventcallbackdispatcherundefinedtpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueuedlq5ED125CE",
+       "tpdscomputestackguruupdateeventcallbackdispatchertpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueuedlq5ED125CE",
        "Arn"
       ]
      },
@@ -1747,7 +1747,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-guru-update-event-callback-dispatcher/sample-stack-guru-update-event-callback-dispatcher-sqs-to-lambda/queue/Resource"
    }
   },
-  "undefinedtpdscomputestackguruupdateeventcallbackdispatcherundefinedtpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueuePolicy36C8D4C6": {
+  "tpdscomputestackguruupdateeventcallbackdispatchertpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueuePolicy36C8D4C6": {
    "Type": "AWS::SQS::QueuePolicy",
    "Properties": {
     "PolicyDocument": {
@@ -1768,7 +1768,7 @@
        },
        "Resource": {
         "Fn::GetAtt": [
-         "undefinedtpdscomputestackguruupdateeventcallbackdispatcherundefinedtpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueue65FC0063",
+         "tpdscomputestackguruupdateeventcallbackdispatchertpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueue65FC0063",
          "Arn"
         ]
        },
@@ -1787,7 +1787,7 @@
        },
        "Resource": {
         "Fn::GetAtt": [
-         "undefinedtpdscomputestackguruupdateeventcallbackdispatcherundefinedtpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueue65FC0063",
+         "tpdscomputestackguruupdateeventcallbackdispatchertpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueue65FC0063",
          "Arn"
         ]
        },
@@ -1810,7 +1810,7 @@
        },
        "Resource": {
         "Fn::GetAtt": [
-         "undefinedtpdscomputestackguruupdateeventcallbackdispatcherundefinedtpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueue65FC0063",
+         "tpdscomputestackguruupdateeventcallbackdispatchertpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueue65FC0063",
          "Arn"
         ]
        }
@@ -1820,7 +1820,7 @@
     },
     "Queues": [
      {
-      "Ref": "undefinedtpdscomputestackguruupdateeventcallbackdispatcherundefinedtpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueue65FC0063"
+      "Ref": "tpdscomputestackguruupdateeventcallbackdispatchertpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueue65FC0063"
      }
     ]
    },
@@ -1828,11 +1828,11 @@
     "aws:cdk:path": "sample-stack/sample-stack-guru-update-event-callback-dispatcher/sample-stack-guru-update-event-callback-dispatcher-sqs-to-lambda/queue/Policy/Resource"
    }
   },
-  "undefinedtpdscomputestackguruupdateeventcallbackdispatcherundefinedtpdscomputestackguruupdateeventcallbackdispatchereventbridgerule8DF531DF": {
+  "tpdscomputestackguruupdateeventcallbackdispatchertpdscomputestackguruupdateeventcallbackdispatchereventbridgerule8DF531DF": {
    "Type": "AWS::Events::Rule",
    "Properties": {
     "EventBusName": {
-     "Fn::ImportValue": "undefined-sample-eventbus-export-name"
+     "Fn::ImportValue": "-sample-eventbus-export-name"
     },
     "EventPattern": {
      "detail-type": [
@@ -1844,7 +1844,7 @@
      {
       "Arn": {
        "Fn::GetAtt": [
-        "undefinedtpdscomputestackguruupdateeventcallbackdispatcherundefinedtpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueue65FC0063",
+        "tpdscomputestackguruupdateeventcallbackdispatchertpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueue65FC0063",
         "Arn"
        ]
       },
@@ -1856,7 +1856,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-guru-update-event-callback-dispatcher/sample-stack-guru-update-event-callback-dispatcher-event-bridge-rule/Resource"
    }
   },
-  "undefinedtpdscomputestackguruupdateeventcallbackdispatcherundefinedtpdscomputestackguruupdateeventcallbackdispatcheralarm1052DFF9": {
+  "tpdscomputestackguruupdateeventcallbackdispatchertpdscomputestackguruupdateeventcallbackdispatcheralarm1052DFF9": {
    "Type": "AWS::CloudWatch::Alarm",
    "Properties": {
     "AlarmActions": [
@@ -1870,7 +1870,7 @@
       "Name": "QueueName",
       "Value": {
        "Fn::GetAtt": [
-        "undefinedtpdscomputestackguruupdateeventcallbackdispatcherundefinedtpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueuedlq5ED125CE",
+        "tpdscomputestackguruupdateeventcallbackdispatchertpdscomputestackguruupdateeventcallbackdispatchersqstolambdaqueuedlq5ED125CE",
         "QueueName"
        ]
       }
@@ -1887,7 +1887,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-guru-update-event-callback-dispatcher/sample-stack-guru-update-event-callback-dispatcher-alarm/Resource"
    }
   },
-  "undefinedtpdscomputestackcoreadoptionupdateundefinedtpdscomputestackcoreadoptionupdatelambda4204AF22": {
+  "tpdscomputestackcoreadoptionupdatetpdscomputestackcoreadoptionupdatelambda4204AF22": {
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Architectures": [
@@ -1902,15 +1902,15 @@
       "account": "202468521054",
       "region": "eu-west-2",
       "EVENT_BUS_NAME": {
-       "Fn::ImportValue": "undefined-sample-eventbus-export-name"
+       "Fn::ImportValue": "-sample-eventbus-export-name"
       }
      }
     },
-    "FunctionName": "undefined-sample-core-adoption-update",
+    "FunctionName": "-sample-core-adoption-update",
     "Handler": "bootstrap",
     "Role": {
      "Fn::GetAtt": [
-      "undefinedsamplerole619145D4",
+      "samplerole619145D4",
       "Arn"
      ]
     },
@@ -1921,9 +1921,9 @@
     }
    },
    "DependsOn": [
-    "undefinedsampleroleDefaultPolicy78972E89",
-    "undefinedsamplerole619145D4",
-    "undefinedsampleroleundefinedsamplepolicy1CAB6B24"
+    "sampleroleDefaultPolicy78972E89",
+    "samplerole619145D4",
+    "samplerolesamplepolicy1CAB6B24"
    ],
    "Metadata": {
     "aws:cdk:path": "sample-stack/sample-stack-core-adoption-update/sample-stack-core-adoption-update-lambda/Resource",
@@ -1932,28 +1932,28 @@
     "aws:asset:property": "Code"
    }
   },
-  "undefinedtpdscomputestackcoreadoptionupdateundefinedtpdscomputestackcoreadoptionupdatelambdaSqsEventSourceundefinedtpdscomputestackundefinedtpdscomputestackcoreadoptionupdateundefinedtpdscomputestackcoreadoptionupdatesqstolambdaqueueE1C04084BE3F503": {
+  "tpdscomputestackcoreadoptionupdatetpdscomputestackcoreadoptionupdatelambdaSqsEventSourcetpdscomputestacktpdscomputestackcoreadoptionupdatetpdscomputestackcoreadoptionupdatesqstolambdaqueueE1C04084BE3F503": {
    "Type": "AWS::Lambda::EventSourceMapping",
    "Properties": {
     "EventSourceArn": {
      "Fn::GetAtt": [
-      "undefinedtpdscomputestackcoreadoptionupdateundefinedtpdscomputestackcoreadoptionupdatesqstolambdaqueue4D279C87",
+      "tpdscomputestackcoreadoptionupdatetpdscomputestackcoreadoptionupdatesqstolambdaqueue4D279C87",
       "Arn"
      ]
     },
     "FunctionName": {
-     "Ref": "undefinedtpdscomputestackcoreadoptionupdateundefinedtpdscomputestackcoreadoptionupdatelambda4204AF22"
+     "Ref": "tpdscomputestackcoreadoptionupdatetpdscomputestackcoreadoptionupdatelambda4204AF22"
     }
    },
    "Metadata": {
-    "aws:cdk:path": "sample-stack/sample-stack-core-adoption-update/sample-stack-core-adoption-update-lambda/SqsEventSource:undefinedtpdscomputestackundefinedtpdscomputestackcoreadoptionupdateundefinedtpdscomputestackcoreadoptionupdatesqstolambdaqueueE1C04082/Resource"
+    "aws:cdk:path": "sample-stack/sample-stack-core-adoption-update/sample-stack-core-adoption-update-lambda/SqsEventSource:tpdscomputestacktpdscomputestackcoreadoptionupdatetpdscomputestackcoreadoptionupdatesqstolambdaqueueE1C04082/Resource"
    }
   },
-  "undefinedtpdscomputestackcoreadoptionupdateundefinedtpdscomputestackcoreadoptionupdatesqstolambdaqueuedlq430C1C22": {
+  "tpdscomputestackcoreadoptionupdatetpdscomputestackcoreadoptionupdatesqstolambdaqueuedlq430C1C22": {
    "Type": "AWS::SQS::Queue",
    "Properties": {
     "KmsMasterKeyId": {
-     "Fn::ImportValue": "undefined-sample-sqs-key-export-arn"
+     "Fn::ImportValue": "-sample-sqs-key-export-arn"
     },
     "MessageRetentionPeriod": 1209600,
     "QueueName": "sample-stack-core-adoption-update-queue-dlq"
@@ -1964,7 +1964,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-adoption-update/sample-stack-core-adoption-update-sqs-to-lambda/queue-dlq/Resource"
    }
   },
-  "undefinedtpdscomputestackcoreadoptionupdateundefinedtpdscomputestackcoreadoptionupdatesqstolambdaqueuedlqPolicy432A47C6": {
+  "tpdscomputestackcoreadoptionupdatetpdscomputestackcoreadoptionupdatesqstolambdaqueuedlqPolicy432A47C6": {
    "Type": "AWS::SQS::QueuePolicy",
    "Properties": {
     "PolicyDocument": {
@@ -1985,7 +1985,7 @@
        },
        "Resource": {
         "Fn::GetAtt": [
-         "undefinedtpdscomputestackcoreadoptionupdateundefinedtpdscomputestackcoreadoptionupdatesqstolambdaqueuedlq430C1C22",
+         "tpdscomputestackcoreadoptionupdatetpdscomputestackcoreadoptionupdatesqstolambdaqueuedlq430C1C22",
          "Arn"
         ]
        },
@@ -2004,7 +2004,7 @@
        },
        "Resource": {
         "Fn::GetAtt": [
-         "undefinedtpdscomputestackcoreadoptionupdateundefinedtpdscomputestackcoreadoptionupdatesqstolambdaqueuedlq430C1C22",
+         "tpdscomputestackcoreadoptionupdatetpdscomputestackcoreadoptionupdatesqstolambdaqueuedlq430C1C22",
          "Arn"
         ]
        },
@@ -2015,7 +2015,7 @@
     },
     "Queues": [
      {
-      "Ref": "undefinedtpdscomputestackcoreadoptionupdateundefinedtpdscomputestackcoreadoptionupdatesqstolambdaqueuedlq430C1C22"
+      "Ref": "tpdscomputestackcoreadoptionupdatetpdscomputestackcoreadoptionupdatesqstolambdaqueuedlq430C1C22"
      }
     ]
    },
@@ -2023,11 +2023,11 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-adoption-update/sample-stack-core-adoption-update-sqs-to-lambda/queue-dlq/Policy/Resource"
    }
   },
-  "undefinedtpdscomputestackcoreadoptionupdateundefinedtpdscomputestackcoreadoptionupdatesqstolambdaqueue4D279C87": {
+  "tpdscomputestackcoreadoptionupdatetpdscomputestackcoreadoptionupdatesqstolambdaqueue4D279C87": {
    "Type": "AWS::SQS::Queue",
    "Properties": {
     "KmsMasterKeyId": {
-     "Fn::ImportValue": "undefined-sample-sqs-key-export-arn"
+     "Fn::ImportValue": "-sample-sqs-key-export-arn"
     },
     "MessageRetentionPeriod": 1209600,
     "QueueName": "sample-stack-core-adoption-update-queue",
@@ -2035,7 +2035,7 @@
     "RedrivePolicy": {
      "deadLetterTargetArn": {
       "Fn::GetAtt": [
-       "undefinedtpdscomputestackcoreadoptionupdateundefinedtpdscomputestackcoreadoptionupdatesqstolambdaqueuedlq430C1C22",
+       "tpdscomputestackcoreadoptionupdatetpdscomputestackcoreadoptionupdatesqstolambdaqueuedlq430C1C22",
        "Arn"
       ]
      },
@@ -2049,7 +2049,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-adoption-update/sample-stack-core-adoption-update-sqs-to-lambda/queue/Resource"
    }
   },
-  "undefinedtpdscomputestackcoreadoptionupdateundefinedtpdscomputestackcoreadoptionupdatesqstolambdaqueuePolicy1B13B9C9": {
+  "tpdscomputestackcoreadoptionupdatetpdscomputestackcoreadoptionupdatesqstolambdaqueuePolicy1B13B9C9": {
    "Type": "AWS::SQS::QueuePolicy",
    "Properties": {
     "PolicyDocument": {
@@ -2070,7 +2070,7 @@
        },
        "Resource": {
         "Fn::GetAtt": [
-         "undefinedtpdscomputestackcoreadoptionupdateundefinedtpdscomputestackcoreadoptionupdatesqstolambdaqueue4D279C87",
+         "tpdscomputestackcoreadoptionupdatetpdscomputestackcoreadoptionupdatesqstolambdaqueue4D279C87",
          "Arn"
         ]
        },
@@ -2089,7 +2089,7 @@
        },
        "Resource": {
         "Fn::GetAtt": [
-         "undefinedtpdscomputestackcoreadoptionupdateundefinedtpdscomputestackcoreadoptionupdatesqstolambdaqueue4D279C87",
+         "tpdscomputestackcoreadoptionupdatetpdscomputestackcoreadoptionupdatesqstolambdaqueue4D279C87",
          "Arn"
         ]
        },
@@ -2112,7 +2112,7 @@
        },
        "Resource": {
         "Fn::GetAtt": [
-         "undefinedtpdscomputestackcoreadoptionupdateundefinedtpdscomputestackcoreadoptionupdatesqstolambdaqueue4D279C87",
+         "tpdscomputestackcoreadoptionupdatetpdscomputestackcoreadoptionupdatesqstolambdaqueue4D279C87",
          "Arn"
         ]
        }
@@ -2122,7 +2122,7 @@
     },
     "Queues": [
      {
-      "Ref": "undefinedtpdscomputestackcoreadoptionupdateundefinedtpdscomputestackcoreadoptionupdatesqstolambdaqueue4D279C87"
+      "Ref": "tpdscomputestackcoreadoptionupdatetpdscomputestackcoreadoptionupdatesqstolambdaqueue4D279C87"
      }
     ]
    },
@@ -2130,11 +2130,11 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-adoption-update/sample-stack-core-adoption-update-sqs-to-lambda/queue/Policy/Resource"
    }
   },
-  "undefinedtpdscomputestackcoreadoptionupdateundefinedtpdscomputestackcoreadoptionupdateeventbridgeruleE50EBD04": {
+  "tpdscomputestackcoreadoptionupdatetpdscomputestackcoreadoptionupdateeventbridgeruleE50EBD04": {
    "Type": "AWS::Events::Rule",
    "Properties": {
     "EventBusName": {
-     "Fn::ImportValue": "undefined-sample-eventbus-export-name"
+     "Fn::ImportValue": "-sample-eventbus-export-name"
     },
     "EventPattern": {
      "detail-type": [
@@ -2146,7 +2146,7 @@
      {
       "Arn": {
        "Fn::GetAtt": [
-        "undefinedtpdscomputestackcoreadoptionupdateundefinedtpdscomputestackcoreadoptionupdatesqstolambdaqueue4D279C87",
+        "tpdscomputestackcoreadoptionupdatetpdscomputestackcoreadoptionupdatesqstolambdaqueue4D279C87",
         "Arn"
        ]
       },
@@ -2158,7 +2158,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-adoption-update/sample-stack-core-adoption-update-event-bridge-rule/Resource"
    }
   },
-  "undefinedtpdscomputestackcoreadoptionupdateundefinedtpdscomputestackcoreadoptionupdatealarm2B71EB0D": {
+  "tpdscomputestackcoreadoptionupdatetpdscomputestackcoreadoptionupdatealarm2B71EB0D": {
    "Type": "AWS::CloudWatch::Alarm",
    "Properties": {
     "AlarmActions": [
@@ -2172,7 +2172,7 @@
       "Name": "QueueName",
       "Value": {
        "Fn::GetAtt": [
-        "undefinedtpdscomputestackcoreadoptionupdateundefinedtpdscomputestackcoreadoptionupdatesqstolambdaqueuedlq430C1C22",
+        "tpdscomputestackcoreadoptionupdatetpdscomputestackcoreadoptionupdatesqstolambdaqueuedlq430C1C22",
         "QueueName"
        ]
       }
@@ -2189,7 +2189,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-adoption-update/sample-stack-core-adoption-update-alarm/Resource"
    }
   },
-  "undefinedtpdscomputestackcorerequestupdatedispatcherundefinedtpdscomputestackcorerequestupdatedispatcherlambda8EF21D32": {
+  "tpdscomputestackcorerequestupdatedispatchertpdscomputestackcorerequestupdatedispatcherlambda8EF21D32": {
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Architectures": [
@@ -2205,11 +2205,11 @@
       "region": "eu-west-2"
      }
     },
-    "FunctionName": "undefined-sample-update-request-update-dispatcher",
+    "FunctionName": "-sample-update-request-update-dispatcher",
     "Handler": "bootstrap",
     "Role": {
      "Fn::GetAtt": [
-      "undefinedsamplerole619145D4",
+      "samplerole619145D4",
       "Arn"
      ]
     },
@@ -2220,9 +2220,9 @@
     }
    },
    "DependsOn": [
-    "undefinedsampleroleDefaultPolicy78972E89",
-    "undefinedsamplerole619145D4",
-    "undefinedsampleroleundefinedsamplepolicy1CAB6B24"
+    "sampleroleDefaultPolicy78972E89",
+    "samplerole619145D4",
+    "samplerolesamplepolicy1CAB6B24"
    ],
    "Metadata": {
     "aws:cdk:path": "sample-stack/sample-stack-core-request-update-dispatcher/sample-stack-core-request-update-dispatcher-lambda/Resource",
@@ -2231,24 +2231,24 @@
     "aws:asset:property": "Code"
    }
   },
-  "undefinedtpdscomputestackcorerequestupdatedispatcherundefinedtpdscomputestackcorerequestupdatedispatcherlambdaSqsEventSourceundefinedtpdscomputestackundefinedtpdscomputestackcorerequestupdatedispatcherundefinedtpdscomputestackcorerequestupd3B4AABEE": {
+  "tpdscomputestackcorerequestupdatedispatchertpdscomputestackcorerequestupdatedispatcherlambdaSqsEventSourcetpdscomputestacktpdscomputestackcorerequestupdatedispatchertpdscomputestackcorerequestupd3B4AABEE": {
    "Type": "AWS::Lambda::EventSourceMapping",
    "Properties": {
     "EventSourceArn": {
      "Fn::GetAtt": [
-      "undefinedtpdscomputestackcorerequestupdatedispatcherundefinedtpdscomputestackcorerequestupdatedispatchersqstolambdaqueueFCB1C79C",
+      "tpdscomputestackcorerequestupdatedispatchertpdscomputestackcorerequestupdatedispatchersqstolambdaqueueFCB1C79C",
       "Arn"
      ]
     },
     "FunctionName": {
-     "Ref": "undefinedtpdscomputestackcorerequestupdatedispatcherundefinedtpdscomputestackcorerequestupdatedispatcherlambda8EF21D32"
+     "Ref": "tpdscomputestackcorerequestupdatedispatchertpdscomputestackcorerequestupdatedispatcherlambda8EF21D32"
     }
    },
    "Metadata": {
-    "aws:cdk:path": "sample-stack/sample-stack-core-request-update-dispatcher/sample-stack-core-request-update-dispatcher-lambda/SqsEventSource:undefinedtpdscomputestackundefinedtpdscomputestackcorerequestupdatedispatcherundefinedtpdscomputestackcorerequestupdatedispatchersqstolambdaqueueB7B56518/Resource"
+    "aws:cdk:path": "sample-stack/sample-stack-core-request-update-dispatcher/sample-stack-core-request-update-dispatcher-lambda/SqsEventSource:tpdscomputestacktpdscomputestackcorerequestupdatedispatchertpdscomputestackcorerequestupdatedispatchersqstolambdaqueueB7B56518/Resource"
    }
   },
-  "undefinedtpdscomputestackcorerequestupdatedispatcherundefinedtpdscomputestackcorerequestupdatedispatchersqstolambdaqueuedlq38716D84": {
+  "tpdscomputestackcorerequestupdatedispatchertpdscomputestackcorerequestupdatedispatchersqstolambdaqueuedlq38716D84": {
    "Type": "AWS::SQS::Queue",
    "Properties": {
     "KmsMasterKeyId": "alias/aws/sqs",
@@ -2261,7 +2261,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-request-update-dispatcher/sample-stack-core-request-update-dispatcher-sqs-to-lambda/queue-dlq/Resource"
    }
   },
-  "undefinedtpdscomputestackcorerequestupdatedispatcherundefinedtpdscomputestackcorerequestupdatedispatchersqstolambdaqueuedlqPolicy05AC38C5": {
+  "tpdscomputestackcorerequestupdatedispatchertpdscomputestackcorerequestupdatedispatchersqstolambdaqueuedlqPolicy05AC38C5": {
    "Type": "AWS::SQS::QueuePolicy",
    "Properties": {
     "PolicyDocument": {
@@ -2282,7 +2282,7 @@
        },
        "Resource": {
         "Fn::GetAtt": [
-         "undefinedtpdscomputestackcorerequestupdatedispatcherundefinedtpdscomputestackcorerequestupdatedispatchersqstolambdaqueuedlq38716D84",
+         "tpdscomputestackcorerequestupdatedispatchertpdscomputestackcorerequestupdatedispatchersqstolambdaqueuedlq38716D84",
          "Arn"
         ]
        },
@@ -2301,7 +2301,7 @@
        },
        "Resource": {
         "Fn::GetAtt": [
-         "undefinedtpdscomputestackcorerequestupdatedispatcherundefinedtpdscomputestackcorerequestupdatedispatchersqstolambdaqueuedlq38716D84",
+         "tpdscomputestackcorerequestupdatedispatchertpdscomputestackcorerequestupdatedispatchersqstolambdaqueuedlq38716D84",
          "Arn"
         ]
        },
@@ -2312,7 +2312,7 @@
     },
     "Queues": [
      {
-      "Ref": "undefinedtpdscomputestackcorerequestupdatedispatcherundefinedtpdscomputestackcorerequestupdatedispatchersqstolambdaqueuedlq38716D84"
+      "Ref": "tpdscomputestackcorerequestupdatedispatchertpdscomputestackcorerequestupdatedispatchersqstolambdaqueuedlq38716D84"
      }
     ]
    },
@@ -2320,7 +2320,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-request-update-dispatcher/sample-stack-core-request-update-dispatcher-sqs-to-lambda/queue-dlq/Policy/Resource"
    }
   },
-  "undefinedtpdscomputestackcorerequestupdatedispatcherundefinedtpdscomputestackcorerequestupdatedispatchersqstolambdaqueueFCB1C79C": {
+  "tpdscomputestackcorerequestupdatedispatchertpdscomputestackcorerequestupdatedispatchersqstolambdaqueueFCB1C79C": {
    "Type": "AWS::SQS::Queue",
    "Properties": {
     "KmsMasterKeyId": "alias/aws/sqs",
@@ -2330,7 +2330,7 @@
     "RedrivePolicy": {
      "deadLetterTargetArn": {
       "Fn::GetAtt": [
-       "undefinedtpdscomputestackcorerequestupdatedispatcherundefinedtpdscomputestackcorerequestupdatedispatchersqstolambdaqueuedlq38716D84",
+       "tpdscomputestackcorerequestupdatedispatchertpdscomputestackcorerequestupdatedispatchersqstolambdaqueuedlq38716D84",
        "Arn"
       ]
      },
@@ -2344,7 +2344,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-request-update-dispatcher/sample-stack-core-request-update-dispatcher-sqs-to-lambda/queue/Resource"
    }
   },
-  "undefinedtpdscomputestackcorerequestupdatedispatcherundefinedtpdscomputestackcorerequestupdatedispatchersqstolambdaqueuePolicyEDFC332A": {
+  "tpdscomputestackcorerequestupdatedispatchertpdscomputestackcorerequestupdatedispatchersqstolambdaqueuePolicyEDFC332A": {
    "Type": "AWS::SQS::QueuePolicy",
    "Properties": {
     "PolicyDocument": {
@@ -2365,7 +2365,7 @@
        },
        "Resource": {
         "Fn::GetAtt": [
-         "undefinedtpdscomputestackcorerequestupdatedispatcherundefinedtpdscomputestackcorerequestupdatedispatchersqstolambdaqueueFCB1C79C",
+         "tpdscomputestackcorerequestupdatedispatchertpdscomputestackcorerequestupdatedispatchersqstolambdaqueueFCB1C79C",
          "Arn"
         ]
        },
@@ -2384,7 +2384,7 @@
        },
        "Resource": {
         "Fn::GetAtt": [
-         "undefinedtpdscomputestackcorerequestupdatedispatcherundefinedtpdscomputestackcorerequestupdatedispatchersqstolambdaqueueFCB1C79C",
+         "tpdscomputestackcorerequestupdatedispatchertpdscomputestackcorerequestupdatedispatchersqstolambdaqueueFCB1C79C",
          "Arn"
         ]
        },
@@ -2395,7 +2395,7 @@
     },
     "Queues": [
      {
-      "Ref": "undefinedtpdscomputestackcorerequestupdatedispatcherundefinedtpdscomputestackcorerequestupdatedispatchersqstolambdaqueueFCB1C79C"
+      "Ref": "tpdscomputestackcorerequestupdatedispatchertpdscomputestackcorerequestupdatedispatchersqstolambdaqueueFCB1C79C"
      }
     ]
    },
@@ -2403,7 +2403,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-request-update-dispatcher/sample-stack-core-request-update-dispatcher-sqs-to-lambda/queue/Policy/Resource"
    }
   },
-  "undefinedtpdscomputestackcorerequestupdatedispatcherundefinedtpdscomputestackcorerequestupdatedispatcheralarm4DEE8D85": {
+  "tpdscomputestackcorerequestupdatedispatchertpdscomputestackcorerequestupdatedispatcheralarm4DEE8D85": {
    "Type": "AWS::CloudWatch::Alarm",
    "Properties": {
     "AlarmActions": [
@@ -2417,7 +2417,7 @@
       "Name": "QueueName",
       "Value": {
        "Fn::GetAtt": [
-        "undefinedtpdscomputestackcorerequestupdatedispatcherundefinedtpdscomputestackcorerequestupdatedispatchersqstolambdaqueuedlq38716D84",
+        "tpdscomputestackcorerequestupdatedispatchertpdscomputestackcorerequestupdatedispatchersqstolambdaqueuedlq38716D84",
         "QueueName"
        ]
       }
@@ -2434,7 +2434,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-request-update-dispatcher/sample-stack-core-request-update-dispatcher-alarm/Resource"
    }
   },
-  "undefinedtpdscomputestackcorerequestupdatepollerundefinedtpdscomputestackcorerequestupdatepollerlambda9E850805": {
+  "tpdscomputestackcorerequestupdatepollertpdscomputestackcorerequestupdatepollerlambda9E850805": {
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Architectures": [
@@ -2449,18 +2449,18 @@
       "account": "202468521054",
       "region": "eu-west-2",
       "EVENT_BUS_NAME": {
-       "Fn::ImportValue": "undefined-sample-eventbus-export-name"
+       "Fn::ImportValue": "-sample-eventbus-export-name"
       },
       "POLLER_QUEUE_URL": {
-       "Ref": "undefinedtpdscomputestackcorerequestupdatedispatcherundefinedtpdscomputestackcorerequestupdatedispatchersqstolambdaqueueFCB1C79C"
+       "Ref": "tpdscomputestackcorerequestupdatedispatchertpdscomputestackcorerequestupdatedispatchersqstolambdaqueueFCB1C79C"
       }
      }
     },
-    "FunctionName": "undefined-sample-update-request-update-poller",
+    "FunctionName": "-sample-update-request-update-poller",
     "Handler": "bootstrap",
     "Role": {
      "Fn::GetAtt": [
-      "undefinedsamplerole619145D4",
+      "samplerole619145D4",
       "Arn"
      ]
     },
@@ -2471,9 +2471,9 @@
     }
    },
    "DependsOn": [
-    "undefinedsampleroleDefaultPolicy78972E89",
-    "undefinedsamplerole619145D4",
-    "undefinedsampleroleundefinedsamplepolicy1CAB6B24"
+    "sampleroleDefaultPolicy78972E89",
+    "samplerole619145D4",
+    "samplerolesamplepolicy1CAB6B24"
    ],
    "Metadata": {
     "aws:cdk:path": "sample-stack/sample-stack-core-request-update-poller/sample-stack-core-request-update-poller-lambda/Resource",
@@ -2482,7 +2482,7 @@
     "aws:asset:property": "Code"
    }
   },
-  "undefinedtpdscomputestackcorerequestupdatepollerundefinedtpdscomputestackcorerequestupdatepollerschedule245F264D": {
+  "tpdscomputestackcorerequestupdatepollertpdscomputestackcorerequestupdatepollerschedule245F264D": {
    "Type": "AWS::Events::Rule",
    "Properties": {
     "ScheduleExpression": "rate(10 minutes)",
@@ -2491,7 +2491,7 @@
      {
       "Arn": {
        "Fn::GetAtt": [
-        "undefinedtpdscomputestackcorerequestupdatepollerundefinedtpdscomputestackcorerequestupdatepollerlambda9E850805",
+        "tpdscomputestackcorerequestupdatepollertpdscomputestackcorerequestupdatepollerlambda9E850805",
         "Arn"
        ]
       },
@@ -2503,29 +2503,29 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-request-update-poller/sample-stack-core-request-update-poller-schedule/Resource"
    }
   },
-  "undefinedtpdscomputestackcorerequestupdatepollerundefinedtpdscomputestackcorerequestupdatepollerscheduleAllowEventRuleundefinedtpdscomputestackundefinedtpdscomputestackcorerequestupdatepollerundefinedtpdscomputestackcorerequestupdatepollerlFD02A737": {
+  "tpdscomputestackcorerequestupdatepollertpdscomputestackcorerequestupdatepollerscheduleAllowEventRuletpdscomputestacktpdscomputestackcorerequestupdatepollertpdscomputestackcorerequestupdatepollerlFD02A737": {
    "Type": "AWS::Lambda::Permission",
    "Properties": {
     "Action": "lambda:InvokeFunction",
     "FunctionName": {
      "Fn::GetAtt": [
-      "undefinedtpdscomputestackcorerequestupdatepollerundefinedtpdscomputestackcorerequestupdatepollerlambda9E850805",
+      "tpdscomputestackcorerequestupdatepollertpdscomputestackcorerequestupdatepollerlambda9E850805",
       "Arn"
      ]
     },
     "Principal": "events.amazonaws.com",
     "SourceArn": {
      "Fn::GetAtt": [
-      "undefinedtpdscomputestackcorerequestupdatepollerundefinedtpdscomputestackcorerequestupdatepollerschedule245F264D",
+      "tpdscomputestackcorerequestupdatepollertpdscomputestackcorerequestupdatepollerschedule245F264D",
       "Arn"
      ]
     }
    },
    "Metadata": {
-    "aws:cdk:path": "sample-stack/sample-stack-core-request-update-poller/sample-stack-core-request-update-poller-schedule/AllowEventRuleundefinedtpdscomputestackundefinedtpdscomputestackcorerequestupdatepollerundefinedtpdscomputestackcorerequestupdatepollerlambdaCC40A2A9"
+    "aws:cdk:path": "sample-stack/sample-stack-core-request-update-poller/sample-stack-core-request-update-poller-schedule/AllowEventRuletpdscomputestacktpdscomputestackcorerequestupdatepollertpdscomputestackcorerequestupdatepollerlambdaCC40A2A9"
    }
   },
-  "undefinedtpdscomputestackcorerequestupdatepollerundefinedtpdscomputestackcorerequestupdatepolleralarm3B3B8DA6": {
+  "tpdscomputestackcorerequestupdatepollertpdscomputestackcorerequestupdatepolleralarm3B3B8DA6": {
    "Type": "AWS::CloudWatch::Alarm",
    "Properties": {
     "AlarmActions": [
@@ -2538,7 +2538,7 @@
      {
       "Name": "FunctionName",
       "Value": {
-       "Ref": "undefinedtpdscomputestackcorerequestupdatepollerundefinedtpdscomputestackcorerequestupdatepollerlambda9E850805"
+       "Ref": "tpdscomputestackcorerequestupdatepollertpdscomputestackcorerequestupdatepollerlambda9E850805"
       }
      }
     ],
@@ -2553,7 +2553,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-request-update-poller/sample-stack-core-request-update-poller-alarm/Resource"
    }
   },
-  "undefinedtpdscomputestackcorerequestprogressstatusundefinedtpdscomputestackcorerequestprogressstatuslambda532A76D3": {
+  "tpdscomputestackcorerequestprogressstatustpdscomputestackcorerequestprogressstatuslambda532A76D3": {
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Architectures": [
@@ -2568,18 +2568,18 @@
       "account": "202468521054",
       "region": "eu-west-2",
       "EVENT_BUS_NAME": {
-       "Fn::ImportValue": "undefined-sample-eventbus-export-name"
+       "Fn::ImportValue": "-sample-eventbus-export-name"
       },
       "POLLER_QUEUE_URL": {
-       "Ref": "undefinedtpdscomputestackcorerequestupdatedispatcherundefinedtpdscomputestackcorerequestupdatedispatchersqstolambdaqueueFCB1C79C"
+       "Ref": "tpdscomputestackcorerequestupdatedispatchertpdscomputestackcorerequestupdatedispatchersqstolambdaqueueFCB1C79C"
       }
      }
     },
-    "FunctionName": "undefined-sample-update-request-progress-status",
+    "FunctionName": "-sample-update-request-progress-status",
     "Handler": "bootstrap",
     "Role": {
      "Fn::GetAtt": [
-      "undefinedsamplerole619145D4",
+      "samplerole619145D4",
       "Arn"
      ]
     },
@@ -2590,9 +2590,9 @@
     }
    },
    "DependsOn": [
-    "undefinedsampleroleDefaultPolicy78972E89",
-    "undefinedsamplerole619145D4",
-    "undefinedsampleroleundefinedsamplepolicy1CAB6B24"
+    "sampleroleDefaultPolicy78972E89",
+    "samplerole619145D4",
+    "samplerolesamplepolicy1CAB6B24"
    ],
    "Metadata": {
     "aws:cdk:path": "sample-stack/sample-stack-core-request-progress-status/sample-stack-core-request-progress-status-lambda/Resource",
@@ -2601,7 +2601,7 @@
     "aws:asset:property": "Code"
    }
   },
-  "undefinedtpdscomputestackcorerequestprogressstatusundefinedtpdscomputestackcorerequestprogressstatusalarm377EF41A": {
+  "tpdscomputestackcorerequestprogressstatustpdscomputestackcorerequestprogressstatusalarm377EF41A": {
    "Type": "AWS::CloudWatch::Alarm",
    "Properties": {
     "AlarmActions": [
@@ -2614,7 +2614,7 @@
      {
       "Name": "FunctionName",
       "Value": {
-       "Ref": "undefinedtpdscomputestackcorerequestprogressstatusundefinedtpdscomputestackcorerequestprogressstatuslambda532A76D3"
+       "Ref": "tpdscomputestackcorerequestprogressstatustpdscomputestackcorerequestprogressstatuslambda532A76D3"
       }
      }
     ],
@@ -2629,7 +2629,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-request-progress-status/sample-stack-core-request-progress-status-alarm/Resource"
    }
   },
-  "undefinedtpdscomputestackcoreadoptionstatusundefinedtpdscomputestackcoreadoptionstatuslambda94366C0B": {
+  "tpdscomputestackcoreadoptionstatustpdscomputestackcoreadoptionstatuslambda94366C0B": {
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Architectures": [
@@ -2645,11 +2645,11 @@
       "region": "eu-west-2"
      }
     },
-    "FunctionName": "undefined-sample-core-adoption-status",
+    "FunctionName": "-sample-core-adoption-status",
     "Handler": "bootstrap",
     "Role": {
      "Fn::GetAtt": [
-      "undefinedsamplerole619145D4",
+      "samplerole619145D4",
       "Arn"
      ]
     },
@@ -2660,9 +2660,9 @@
     }
    },
    "DependsOn": [
-    "undefinedsampleroleDefaultPolicy78972E89",
-    "undefinedsamplerole619145D4",
-    "undefinedsampleroleundefinedsamplepolicy1CAB6B24"
+    "sampleroleDefaultPolicy78972E89",
+    "samplerole619145D4",
+    "samplerolesamplepolicy1CAB6B24"
    ],
    "Metadata": {
     "aws:cdk:path": "sample-stack/sample-stack-core-adoption-status/sample-stack-core-adoption-status-lambda/Resource",
@@ -2671,7 +2671,7 @@
     "aws:asset:property": "Code"
    }
   },
-  "undefinedtpdscomputestackcoreadoptionstatusundefinedtpdscomputestackcoreadoptionstatusalarmE715CE22": {
+  "tpdscomputestackcoreadoptionstatustpdscomputestackcoreadoptionstatusalarmE715CE22": {
    "Type": "AWS::CloudWatch::Alarm",
    "Properties": {
     "AlarmActions": [
@@ -2684,7 +2684,7 @@
      {
       "Name": "FunctionName",
       "Value": {
-       "Ref": "undefinedtpdscomputestackcoreadoptionstatusundefinedtpdscomputestackcoreadoptionstatuslambda94366C0B"
+       "Ref": "tpdscomputestackcoreadoptionstatustpdscomputestackcoreadoptionstatuslambda94366C0B"
       }
      }
     ],
@@ -2699,7 +2699,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-adoption-status/sample-stack-core-adoption-status-alarm/Resource"
    }
   },
-  "undefinedtpdscomputestackcorereadingscallbackundefinedtpdscomputestackcorereadingscallbacklambdaE9B4988C": {
+  "tpdscomputestackcorereadingscallbacktpdscomputestackcorereadingscallbacklambdaE9B4988C": {
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Architectures": [
@@ -2715,11 +2715,11 @@
       "region": "eu-west-2"
      }
     },
-    "FunctionName": "undefined-sample-core-readings-callback",
+    "FunctionName": "-sample-core-readings-callback",
     "Handler": "bootstrap",
     "Role": {
      "Fn::GetAtt": [
-      "undefinedsamplerole619145D4",
+      "samplerole619145D4",
       "Arn"
      ]
     },
@@ -2730,9 +2730,9 @@
     }
    },
    "DependsOn": [
-    "undefinedsampleroleDefaultPolicy78972E89",
-    "undefinedsamplerole619145D4",
-    "undefinedsampleroleundefinedsamplepolicy1CAB6B24"
+    "sampleroleDefaultPolicy78972E89",
+    "samplerole619145D4",
+    "samplerolesamplepolicy1CAB6B24"
    ],
    "Metadata": {
     "aws:cdk:path": "sample-stack/sample-stack-core-readings-callback/sample-stack-core-readings-callback-lambda/Resource",
@@ -2741,24 +2741,24 @@
     "aws:asset:property": "Code"
    }
   },
-  "undefinedtpdscomputestackcorereadingscallbackundefinedtpdscomputestackcorereadingscallbacklambdaSqsEventSourceundefinedtpdscomputestackundefinedtpdscomputestackcorereadingscallbackundefinedtpdscomputestackcorereadingscallbacksqstolambdaqueuB06949CF": {
+  "tpdscomputestackcorereadingscallbacktpdscomputestackcorereadingscallbacklambdaSqsEventSourcetpdscomputestacktpdscomputestackcorereadingscallbacktpdscomputestackcorereadingscallbacksqstolambdaqueuB06949CF": {
    "Type": "AWS::Lambda::EventSourceMapping",
    "Properties": {
     "EventSourceArn": {
      "Fn::GetAtt": [
-      "undefinedtpdscomputestackcorereadingscallbackundefinedtpdscomputestackcorereadingscallbacksqstolambdaqueue4E011B1C",
+      "tpdscomputestackcorereadingscallbacktpdscomputestackcorereadingscallbacksqstolambdaqueue4E011B1C",
       "Arn"
      ]
     },
     "FunctionName": {
-     "Ref": "undefinedtpdscomputestackcorereadingscallbackundefinedtpdscomputestackcorereadingscallbacklambdaE9B4988C"
+     "Ref": "tpdscomputestackcorereadingscallbacktpdscomputestackcorereadingscallbacklambdaE9B4988C"
     }
    },
    "Metadata": {
-    "aws:cdk:path": "sample-stack/sample-stack-core-readings-callback/sample-stack-core-readings-callback-lambda/SqsEventSource:undefinedtpdscomputestackundefinedtpdscomputestackcorereadingscallbackundefinedtpdscomputestackcorereadingscallbacksqstolambdaqueueA3CD0BD3/Resource"
+    "aws:cdk:path": "sample-stack/sample-stack-core-readings-callback/sample-stack-core-readings-callback-lambda/SqsEventSource:tpdscomputestacktpdscomputestackcorereadingscallbacktpdscomputestackcorereadingscallbacksqstolambdaqueueA3CD0BD3/Resource"
    }
   },
-  "undefinedtpdscomputestackcorereadingscallbackundefinedtpdscomputestackcorereadingscallbacksqstolambdaqueuedlq17FD00C2": {
+  "tpdscomputestackcorereadingscallbacktpdscomputestackcorereadingscallbacksqstolambdaqueuedlq17FD00C2": {
    "Type": "AWS::SQS::Queue",
    "Properties": {
     "KmsMasterKeyId": "alias/aws/sqs",
@@ -2771,7 +2771,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-readings-callback/sample-stack-core-readings-callback-sqs-to-lambda/queue-dlq/Resource"
    }
   },
-  "undefinedtpdscomputestackcorereadingscallbackundefinedtpdscomputestackcorereadingscallbacksqstolambdaqueuedlqPolicy5705B2C9": {
+  "tpdscomputestackcorereadingscallbacktpdscomputestackcorereadingscallbacksqstolambdaqueuedlqPolicy5705B2C9": {
    "Type": "AWS::SQS::QueuePolicy",
    "Properties": {
     "PolicyDocument": {
@@ -2792,7 +2792,7 @@
        },
        "Resource": {
         "Fn::GetAtt": [
-         "undefinedtpdscomputestackcorereadingscallbackundefinedtpdscomputestackcorereadingscallbacksqstolambdaqueuedlq17FD00C2",
+         "tpdscomputestackcorereadingscallbacktpdscomputestackcorereadingscallbacksqstolambdaqueuedlq17FD00C2",
          "Arn"
         ]
        },
@@ -2811,7 +2811,7 @@
        },
        "Resource": {
         "Fn::GetAtt": [
-         "undefinedtpdscomputestackcorereadingscallbackundefinedtpdscomputestackcorereadingscallbacksqstolambdaqueuedlq17FD00C2",
+         "tpdscomputestackcorereadingscallbacktpdscomputestackcorereadingscallbacksqstolambdaqueuedlq17FD00C2",
          "Arn"
         ]
        },
@@ -2822,7 +2822,7 @@
     },
     "Queues": [
      {
-      "Ref": "undefinedtpdscomputestackcorereadingscallbackundefinedtpdscomputestackcorereadingscallbacksqstolambdaqueuedlq17FD00C2"
+      "Ref": "tpdscomputestackcorereadingscallbacktpdscomputestackcorereadingscallbacksqstolambdaqueuedlq17FD00C2"
      }
     ]
    },
@@ -2830,7 +2830,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-readings-callback/sample-stack-core-readings-callback-sqs-to-lambda/queue-dlq/Policy/Resource"
    }
   },
-  "undefinedtpdscomputestackcorereadingscallbackundefinedtpdscomputestackcorereadingscallbacksqstolambdaqueue4E011B1C": {
+  "tpdscomputestackcorereadingscallbacktpdscomputestackcorereadingscallbacksqstolambdaqueue4E011B1C": {
    "Type": "AWS::SQS::Queue",
    "Properties": {
     "KmsMasterKeyId": "alias/aws/sqs",
@@ -2840,7 +2840,7 @@
     "RedrivePolicy": {
      "deadLetterTargetArn": {
       "Fn::GetAtt": [
-       "undefinedtpdscomputestackcorereadingscallbackundefinedtpdscomputestackcorereadingscallbacksqstolambdaqueuedlq17FD00C2",
+       "tpdscomputestackcorereadingscallbacktpdscomputestackcorereadingscallbacksqstolambdaqueuedlq17FD00C2",
        "Arn"
       ]
      },
@@ -2854,7 +2854,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-readings-callback/sample-stack-core-readings-callback-sqs-to-lambda/queue/Resource"
    }
   },
-  "undefinedtpdscomputestackcorereadingscallbackundefinedtpdscomputestackcorereadingscallbacksqstolambdaqueuePolicyCEC221D3": {
+  "tpdscomputestackcorereadingscallbacktpdscomputestackcorereadingscallbacksqstolambdaqueuePolicyCEC221D3": {
    "Type": "AWS::SQS::QueuePolicy",
    "Properties": {
     "PolicyDocument": {
@@ -2875,7 +2875,7 @@
        },
        "Resource": {
         "Fn::GetAtt": [
-         "undefinedtpdscomputestackcorereadingscallbackundefinedtpdscomputestackcorereadingscallbacksqstolambdaqueue4E011B1C",
+         "tpdscomputestackcorereadingscallbacktpdscomputestackcorereadingscallbacksqstolambdaqueue4E011B1C",
          "Arn"
         ]
        },
@@ -2894,7 +2894,7 @@
        },
        "Resource": {
         "Fn::GetAtt": [
-         "undefinedtpdscomputestackcorereadingscallbackundefinedtpdscomputestackcorereadingscallbacksqstolambdaqueue4E011B1C",
+         "tpdscomputestackcorereadingscallbacktpdscomputestackcorereadingscallbacksqstolambdaqueue4E011B1C",
          "Arn"
         ]
        },
@@ -2905,7 +2905,7 @@
     },
     "Queues": [
      {
-      "Ref": "undefinedtpdscomputestackcorereadingscallbackundefinedtpdscomputestackcorereadingscallbacksqstolambdaqueue4E011B1C"
+      "Ref": "tpdscomputestackcorereadingscallbacktpdscomputestackcorereadingscallbacksqstolambdaqueue4E011B1C"
      }
     ]
    },
@@ -2913,7 +2913,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-readings-callback/sample-stack-core-readings-callback-sqs-to-lambda/queue/Policy/Resource"
    }
   },
-  "undefinedtpdscomputestackcorereadingscallbacksqsroleundefinedtpdscomputestackcorereadingscallback3B43A8F2": {
+  "tpdscomputestackcorereadingscallbacksqsroletpdscomputestackcorereadingscallback3B43A8F2": {
    "Type": "AWS::IAM::Role",
    "Properties": {
     "AssumeRolePolicyDocument": {
@@ -2933,7 +2933,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-readings-callback/sqs-role-sample-stack-core-readings-callback/Resource"
    }
   },
-  "undefinedtpdscomputestackcorereadingscallbacksqspolicyundefinedtpdscomputestackcorereadingscallback2CF7422F": {
+  "tpdscomputestackcorereadingscallbacksqspolicytpdscomputestackcorereadingscallback2CF7422F": {
    "Type": "AWS::IAM::Policy",
    "Properties": {
     "PolicyDocument": {
@@ -2943,7 +2943,7 @@
        "Effect": "Allow",
        "Resource": {
         "Fn::GetAtt": [
-         "undefinedtpdscomputestackcorereadingscallbackundefinedtpdscomputestackcorereadingscallbacksqstolambdaqueue4E011B1C",
+         "tpdscomputestackcorereadingscallbacktpdscomputestackcorereadingscallbacksqstolambdaqueue4E011B1C",
          "Arn"
         ]
        }
@@ -2951,10 +2951,10 @@
      ],
      "Version": "2012-10-17"
     },
-    "PolicyName": "undefinedtpdscomputestackcorereadingscallbacksqspolicyundefinedtpdscomputestackcorereadingscallback2CF7422F",
+    "PolicyName": "tpdscomputestackcorereadingscallbacksqspolicytpdscomputestackcorereadingscallback2CF7422F",
     "Roles": [
      {
-      "Ref": "undefinedtpdscomputestackcorereadingscallbacksqsroleundefinedtpdscomputestackcorereadingscallback3B43A8F2"
+      "Ref": "tpdscomputestackcorereadingscallbacksqsroletpdscomputestackcorereadingscallback3B43A8F2"
      }
     ]
    },
@@ -2962,7 +2962,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-readings-callback/sqs-policy-sample-stack-core-readings-callback/Resource"
    }
   },
-  "undefinedtpdscomputestackcorereadingscallbackundefinedtpdscomputestackcorereadingscallbackalarm91BE6C96": {
+  "tpdscomputestackcorereadingscallbacktpdscomputestackcorereadingscallbackalarm91BE6C96": {
    "Type": "AWS::CloudWatch::Alarm",
    "Properties": {
     "AlarmActions": [
@@ -2976,7 +2976,7 @@
       "Name": "QueueName",
       "Value": {
        "Fn::GetAtt": [
-        "undefinedtpdscomputestackcorereadingscallbackundefinedtpdscomputestackcorereadingscallbacksqstolambdaqueuedlq17FD00C2",
+        "tpdscomputestackcorereadingscallbacktpdscomputestackcorereadingscallbacksqstolambdaqueuedlq17FD00C2",
         "QueueName"
        ]
       }
@@ -2993,7 +2993,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-readings-callback/sample-stack-core-readings-callback-alarm/Resource"
    }
   },
-  "undefinedtpdscomputestackcorecreditsendundefinedtpdscomputestackcorecreditsendlambdaEFB630CE": {
+  "tpdscomputestackcorecreditsendtpdscomputestackcorecreditsendlambdaEFB630CE": {
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Architectures": [
@@ -3009,11 +3009,11 @@
       "region": "eu-west-2"
      }
     },
-    "FunctionName": "undefined-sample-core-credit-send",
+    "FunctionName": "-sample-core-credit-send",
     "Handler": "bootstrap",
     "Role": {
      "Fn::GetAtt": [
-      "undefinedsamplerole619145D4",
+      "samplerole619145D4",
       "Arn"
      ]
     },
@@ -3024,9 +3024,9 @@
     }
    },
    "DependsOn": [
-    "undefinedsampleroleDefaultPolicy78972E89",
-    "undefinedsamplerole619145D4",
-    "undefinedsampleroleundefinedsamplepolicy1CAB6B24"
+    "sampleroleDefaultPolicy78972E89",
+    "samplerole619145D4",
+    "samplerolesamplepolicy1CAB6B24"
    ],
    "Metadata": {
     "aws:cdk:path": "sample-stack/sample-stack-core-credit-send/sample-stack-core-credit-send-lambda/Resource",
@@ -3035,7 +3035,7 @@
     "aws:asset:property": "Code"
    }
   },
-  "undefinedtpdscomputestackcorecreditsendundefinedtpdscomputestackcorecreditsendalarmCC47F926": {
+  "tpdscomputestackcorecreditsendtpdscomputestackcorecreditsendalarmCC47F926": {
    "Type": "AWS::CloudWatch::Alarm",
    "Properties": {
     "AlarmActions": [
@@ -3048,7 +3048,7 @@
      {
       "Name": "FunctionName",
       "Value": {
-       "Ref": "undefinedtpdscomputestackcorecreditsendundefinedtpdscomputestackcorecreditsendlambdaEFB630CE"
+       "Ref": "tpdscomputestackcorecreditsendtpdscomputestackcorecreditsendlambdaEFB630CE"
       }
      }
     ],
@@ -3063,7 +3063,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-credit-send/sample-stack-core-credit-send-alarm/Resource"
    }
   },
-  "undefinedtpdscomputestackcorecreditupdatesendcreditundefinedtpdscomputestackcorecreditupdatesendcreditlambda618A02A5": {
+  "tpdscomputestackcorecreditupdatesendcredittpdscomputestackcorecreditupdatesendcreditlambda618A02A5": {
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Architectures": [
@@ -3079,11 +3079,11 @@
       "region": "eu-west-2"
      }
     },
-    "FunctionName": "undefined-sample-core-credit-update-send-credit",
+    "FunctionName": "-sample-core-credit-update-send-credit",
     "Handler": "bootstrap",
     "Role": {
      "Fn::GetAtt": [
-      "undefinedsamplerole619145D4",
+      "samplerole619145D4",
       "Arn"
      ]
     },
@@ -3094,9 +3094,9 @@
     }
    },
    "DependsOn": [
-    "undefinedsampleroleDefaultPolicy78972E89",
-    "undefinedsamplerole619145D4",
-    "undefinedsampleroleundefinedsamplepolicy1CAB6B24"
+    "sampleroleDefaultPolicy78972E89",
+    "samplerole619145D4",
+    "samplerolesamplepolicy1CAB6B24"
    ],
    "Metadata": {
     "aws:cdk:path": "sample-stack/sample-stack-core-credit-update-send-credit/sample-stack-core-credit-update-send-credit-lambda/Resource",
@@ -3105,28 +3105,28 @@
     "aws:asset:property": "Code"
    }
   },
-  "undefinedtpdscomputestackcorecreditupdatesendcreditundefinedtpdscomputestackcorecreditupdatesendcreditlambdaSqsEventSourceundefinedtpdscomputestackundefinedtpdscomputestackcorecreditupdatesendcreditundefinedtpdscomputestackcorecreditupdatesFD80514B": {
+  "tpdscomputestackcorecreditupdatesendcredittpdscomputestackcorecreditupdatesendcreditlambdaSqsEventSourcetpdscomputestacktpdscomputestackcorecreditupdatesendcredittpdscomputestackcorecreditupdatesFD80514B": {
    "Type": "AWS::Lambda::EventSourceMapping",
    "Properties": {
     "EventSourceArn": {
      "Fn::GetAtt": [
-      "undefinedtpdscomputestackcorecreditupdatesendcreditundefinedtpdscomputestackcorecreditupdatesendcreditsqstolambdaqueueB1EE4359",
+      "tpdscomputestackcorecreditupdatesendcredittpdscomputestackcorecreditupdatesendcreditsqstolambdaqueueB1EE4359",
       "Arn"
      ]
     },
     "FunctionName": {
-     "Ref": "undefinedtpdscomputestackcorecreditupdatesendcreditundefinedtpdscomputestackcorecreditupdatesendcreditlambda618A02A5"
+     "Ref": "tpdscomputestackcorecreditupdatesendcredittpdscomputestackcorecreditupdatesendcreditlambda618A02A5"
     }
    },
    "Metadata": {
-    "aws:cdk:path": "sample-stack/sample-stack-core-credit-update-send-credit/sample-stack-core-credit-update-send-credit-lambda/SqsEventSource:undefinedtpdscomputestackundefinedtpdscomputestackcorecreditupdatesendcreditundefinedtpdscomputestackcorecreditupdatesendcreditsqstolambdaqueue2EE1FD9E/Resource"
+    "aws:cdk:path": "sample-stack/sample-stack-core-credit-update-send-credit/sample-stack-core-credit-update-send-credit-lambda/SqsEventSource:tpdscomputestacktpdscomputestackcorecreditupdatesendcredittpdscomputestackcorecreditupdatesendcreditsqstolambdaqueue2EE1FD9E/Resource"
    }
   },
-  "undefinedtpdscomputestackcorecreditupdatesendcreditundefinedtpdscomputestackcorecreditupdatesendcreditsqstolambdaqueuedlqDA0528BA": {
+  "tpdscomputestackcorecreditupdatesendcredittpdscomputestackcorecreditupdatesendcreditsqstolambdaqueuedlqDA0528BA": {
    "Type": "AWS::SQS::Queue",
    "Properties": {
     "KmsMasterKeyId": {
-     "Fn::ImportValue": "undefined-sample-sqs-key-export-arn"
+     "Fn::ImportValue": "-sample-sqs-key-export-arn"
     },
     "MessageRetentionPeriod": 1209600,
     "QueueName": "sample-stack-core-credit-update-send-credit-queue-dlq"
@@ -3137,7 +3137,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-credit-update-send-credit/sample-stack-core-credit-update-send-credit-sqs-to-lambda/queue-dlq/Resource"
    }
   },
-  "undefinedtpdscomputestackcorecreditupdatesendcreditundefinedtpdscomputestackcorecreditupdatesendcreditsqstolambdaqueuedlqPolicy995B7F97": {
+  "tpdscomputestackcorecreditupdatesendcredittpdscomputestackcorecreditupdatesendcreditsqstolambdaqueuedlqPolicy995B7F97": {
    "Type": "AWS::SQS::QueuePolicy",
    "Properties": {
     "PolicyDocument": {
@@ -3158,7 +3158,7 @@
        },
        "Resource": {
         "Fn::GetAtt": [
-         "undefinedtpdscomputestackcorecreditupdatesendcreditundefinedtpdscomputestackcorecreditupdatesendcreditsqstolambdaqueuedlqDA0528BA",
+         "tpdscomputestackcorecreditupdatesendcredittpdscomputestackcorecreditupdatesendcreditsqstolambdaqueuedlqDA0528BA",
          "Arn"
         ]
        },
@@ -3177,7 +3177,7 @@
        },
        "Resource": {
         "Fn::GetAtt": [
-         "undefinedtpdscomputestackcorecreditupdatesendcreditundefinedtpdscomputestackcorecreditupdatesendcreditsqstolambdaqueuedlqDA0528BA",
+         "tpdscomputestackcorecreditupdatesendcredittpdscomputestackcorecreditupdatesendcreditsqstolambdaqueuedlqDA0528BA",
          "Arn"
         ]
        },
@@ -3188,7 +3188,7 @@
     },
     "Queues": [
      {
-      "Ref": "undefinedtpdscomputestackcorecreditupdatesendcreditundefinedtpdscomputestackcorecreditupdatesendcreditsqstolambdaqueuedlqDA0528BA"
+      "Ref": "tpdscomputestackcorecreditupdatesendcredittpdscomputestackcorecreditupdatesendcreditsqstolambdaqueuedlqDA0528BA"
      }
     ]
    },
@@ -3196,11 +3196,11 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-credit-update-send-credit/sample-stack-core-credit-update-send-credit-sqs-to-lambda/queue-dlq/Policy/Resource"
    }
   },
-  "undefinedtpdscomputestackcorecreditupdatesendcreditundefinedtpdscomputestackcorecreditupdatesendcreditsqstolambdaqueueB1EE4359": {
+  "tpdscomputestackcorecreditupdatesendcredittpdscomputestackcorecreditupdatesendcreditsqstolambdaqueueB1EE4359": {
    "Type": "AWS::SQS::Queue",
    "Properties": {
     "KmsMasterKeyId": {
-     "Fn::ImportValue": "undefined-sample-sqs-key-export-arn"
+     "Fn::ImportValue": "-sample-sqs-key-export-arn"
     },
     "MessageRetentionPeriod": 1209600,
     "QueueName": "sample-stack-core-credit-update-send-credit-queue",
@@ -3208,7 +3208,7 @@
     "RedrivePolicy": {
      "deadLetterTargetArn": {
       "Fn::GetAtt": [
-       "undefinedtpdscomputestackcorecreditupdatesendcreditundefinedtpdscomputestackcorecreditupdatesendcreditsqstolambdaqueuedlqDA0528BA",
+       "tpdscomputestackcorecreditupdatesendcredittpdscomputestackcorecreditupdatesendcreditsqstolambdaqueuedlqDA0528BA",
        "Arn"
       ]
      },
@@ -3222,7 +3222,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-credit-update-send-credit/sample-stack-core-credit-update-send-credit-sqs-to-lambda/queue/Resource"
    }
   },
-  "undefinedtpdscomputestackcorecreditupdatesendcreditundefinedtpdscomputestackcorecreditupdatesendcreditsqstolambdaqueuePolicyBE62DEEE": {
+  "tpdscomputestackcorecreditupdatesendcredittpdscomputestackcorecreditupdatesendcreditsqstolambdaqueuePolicyBE62DEEE": {
    "Type": "AWS::SQS::QueuePolicy",
    "Properties": {
     "PolicyDocument": {
@@ -3243,7 +3243,7 @@
        },
        "Resource": {
         "Fn::GetAtt": [
-         "undefinedtpdscomputestackcorecreditupdatesendcreditundefinedtpdscomputestackcorecreditupdatesendcreditsqstolambdaqueueB1EE4359",
+         "tpdscomputestackcorecreditupdatesendcredittpdscomputestackcorecreditupdatesendcreditsqstolambdaqueueB1EE4359",
          "Arn"
         ]
        },
@@ -3262,7 +3262,7 @@
        },
        "Resource": {
         "Fn::GetAtt": [
-         "undefinedtpdscomputestackcorecreditupdatesendcreditundefinedtpdscomputestackcorecreditupdatesendcreditsqstolambdaqueueB1EE4359",
+         "tpdscomputestackcorecreditupdatesendcredittpdscomputestackcorecreditupdatesendcreditsqstolambdaqueueB1EE4359",
          "Arn"
         ]
        },
@@ -3285,7 +3285,7 @@
        },
        "Resource": {
         "Fn::GetAtt": [
-         "undefinedtpdscomputestackcorecreditupdatesendcreditundefinedtpdscomputestackcorecreditupdatesendcreditsqstolambdaqueueB1EE4359",
+         "tpdscomputestackcorecreditupdatesendcredittpdscomputestackcorecreditupdatesendcreditsqstolambdaqueueB1EE4359",
          "Arn"
         ]
        }
@@ -3295,7 +3295,7 @@
     },
     "Queues": [
      {
-      "Ref": "undefinedtpdscomputestackcorecreditupdatesendcreditundefinedtpdscomputestackcorecreditupdatesendcreditsqstolambdaqueueB1EE4359"
+      "Ref": "tpdscomputestackcorecreditupdatesendcredittpdscomputestackcorecreditupdatesendcreditsqstolambdaqueueB1EE4359"
      }
     ]
    },
@@ -3303,11 +3303,11 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-credit-update-send-credit/sample-stack-core-credit-update-send-credit-sqs-to-lambda/queue/Policy/Resource"
    }
   },
-  "undefinedtpdscomputestackcorecreditupdatesendcreditundefinedtpdscomputestackcorecreditupdatesendcrediteventbridgerule573E64E3": {
+  "tpdscomputestackcorecreditupdatesendcredittpdscomputestackcorecreditupdatesendcrediteventbridgerule573E64E3": {
    "Type": "AWS::Events::Rule",
    "Properties": {
     "EventBusName": {
-     "Fn::ImportValue": "undefined-sample-eventbus-export-name"
+     "Fn::ImportValue": "-sample-eventbus-export-name"
     },
     "EventPattern": {
      "detail-type": [
@@ -3319,7 +3319,7 @@
      {
       "Arn": {
        "Fn::GetAtt": [
-        "undefinedtpdscomputestackcorecreditupdatesendcreditundefinedtpdscomputestackcorecreditupdatesendcreditsqstolambdaqueueB1EE4359",
+        "tpdscomputestackcorecreditupdatesendcredittpdscomputestackcorecreditupdatesendcreditsqstolambdaqueueB1EE4359",
         "Arn"
        ]
       },
@@ -3331,7 +3331,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-credit-update-send-credit/sample-stack-core-credit-update-send-credit-event-bridge-rule/Resource"
    }
   },
-  "undefinedtpdscomputestackcorecreditupdatesendcreditundefinedtpdscomputestackcorecreditupdatesendcreditalarm300AB73C": {
+  "tpdscomputestackcorecreditupdatesendcredittpdscomputestackcorecreditupdatesendcreditalarm300AB73C": {
    "Type": "AWS::CloudWatch::Alarm",
    "Properties": {
     "AlarmActions": [
@@ -3345,7 +3345,7 @@
       "Name": "QueueName",
       "Value": {
        "Fn::GetAtt": [
-        "undefinedtpdscomputestackcorecreditupdatesendcreditundefinedtpdscomputestackcorecreditupdatesendcreditsqstolambdaqueuedlqDA0528BA",
+        "tpdscomputestackcorecreditupdatesendcredittpdscomputestackcorecreditupdatesendcreditsqstolambdaqueuedlqDA0528BA",
         "QueueName"
        ]
       }
@@ -3362,7 +3362,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-credit-update-send-credit/sample-stack-core-credit-update-send-credit-alarm/Resource"
    }
   },
-  "undefinedtpdscomputestackcoreconfigureconsumerundefinedtpdscomputestackcoreconfigureconsumerlambda97A4BEAD": {
+  "tpdscomputestackcoreconfigureconsumertpdscomputestackcoreconfigureconsumerlambda97A4BEAD": {
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Architectures": [
@@ -3378,11 +3378,11 @@
       "region": "eu-west-2"
      }
     },
-    "FunctionName": "undefined-sample-core-configure-consumer",
+    "FunctionName": "-sample-core-configure-consumer",
     "Handler": "bootstrap",
     "Role": {
      "Fn::GetAtt": [
-      "undefinedsamplerole619145D4",
+      "samplerole619145D4",
       "Arn"
      ]
     },
@@ -3393,9 +3393,9 @@
     }
    },
    "DependsOn": [
-    "undefinedsampleroleDefaultPolicy78972E89",
-    "undefinedsamplerole619145D4",
-    "undefinedsampleroleundefinedsamplepolicy1CAB6B24"
+    "sampleroleDefaultPolicy78972E89",
+    "samplerole619145D4",
+    "samplerolesamplepolicy1CAB6B24"
    ],
    "Metadata": {
     "aws:cdk:path": "sample-stack/sample-stack-core-configure-consumer/sample-stack-core-configure-consumer-lambda/Resource",
@@ -3404,7 +3404,7 @@
     "aws:asset:property": "Code"
    }
   },
-  "undefinedtpdscomputestackcoreconfigureconsumerundefinedtpdscomputestackcoreconfigureconsumeralarm7D732915": {
+  "tpdscomputestackcoreconfigureconsumertpdscomputestackcoreconfigureconsumeralarm7D732915": {
    "Type": "AWS::CloudWatch::Alarm",
    "Properties": {
     "AlarmActions": [
@@ -3417,7 +3417,7 @@
      {
       "Name": "FunctionName",
       "Value": {
-       "Ref": "undefinedtpdscomputestackcoreconfigureconsumerundefinedtpdscomputestackcoreconfigureconsumerlambda97A4BEAD"
+       "Ref": "tpdscomputestackcoreconfigureconsumertpdscomputestackcoreconfigureconsumerlambda97A4BEAD"
       }
      }
     ],
@@ -3432,7 +3432,7 @@
     "aws:cdk:path": "sample-stack/sample-stack-core-configure-consumer/sample-stack-core-configure-consumer-alarm/Resource"
    }
   },
-  "undefinedtpdscomputestackcoredevicestatushandlerundefinedtpdscomputestackcoredevicestatushandlerlambdaDDDD01B1": {
+  "tpdscomputestackcoredevicestatushandlertpdscomputestackcoredevicestatushandlerlambdaDDDD01B1": {
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Architectures": [
@@ -3448,11 +3448,11 @@
       "region": "eu-west-2"
      }
     },
-    "FunctionName": "undefined-sample-core-device-status-handler",
+    "FunctionName": "-sample-core-device-status-handler",
     "Handler": "bootstrap",
     "Role": {
      "Fn::GetAtt": [
-      "undefinedsamplerole619145D4",
+      "samplerole619145D4",
       "Arn"
      ]
     },
@@ -3463,9 +3463,9 @@
     }
    },
    "DependsOn": [
-    "undefinedsampleroleDefaultPolicy78972E89",
-    "undefinedsamplerole619145D4",
-    "undefinedsampleroleundefinedsamplepolicy1CAB6B24"
+    "sampleroleDefaultPolicy78972E89",
+    "samplerole619145D4",
+    "samplerolesamplepolicy1CAB6B24"
    ],
    "Metadata": {
     "aws:cdk:path": "sample-stack/sample-stack-core-device-status-handler/sample-stack-core-device-status-handler-lambda/Resource",
@@ -3474,7 +3474,7 @@
     "aws:asset:property": "Code"
    }
   },
-  "undefinedtpdscomputestackcoredevicestatushandlerundefinedtpdscomputestackcoredevicestatushandleralarm397F48D4": {
+  "tpdscomputestackcoredevicestatushandlertpdscomputestackcoredevicestatushandleralarm397F48D4": {
    "Type": "AWS::CloudWatch::Alarm",
    "Properties": {
     "AlarmActions": [
@@ -3487,7 +3487,7 @@
      {
       "Name": "FunctionName",
       "Value": {
-       "Ref": "undefinedtpdscomputestackcoredevicestatushandlerundefinedtpdscomputestackcoredevicestatushandlerlambdaDDDD01B1"
+       "Ref": "tpdscomputestackcoredevicestatushandlertpdscomputestackcoredevicestatushandlerlambdaDDDD01B1"
       }
      }
     ],

@@ -1,8 +1,8 @@
 use serde_json::from_str;
 use std::fs;
 
-use cf_to_mermaid::ast::{AST};
-use cf_to_mermaid::cloudformation::Template;
+use cf_to_mermaid::ast::ast::AST;
+use cf_to_mermaid::cloudformation::template::Template;
 
 fn main() {
   println!("Hello, world!");
