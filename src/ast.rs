@@ -12,7 +12,7 @@ pub struct AST(pub Node, pub Vec<AST>);
 
 impl AST {
   pub fn to_mermaid(&self) -> String {
-    let mut result = String::from("```mermaid\ngraph TD;\n");
+    let mut result = String::from("```mermaid\nflowchart LR\n");
     self.to_mermaid_helper(&mut result, "");
     result.push_str(&String::from("```").to_string());
     result
@@ -60,9 +60,7 @@ impl From<Template> for AST {
 
         let child_asts: Vec<AST> = references
           .into_iter()
-          .map(|ref_resource| {
-            AST(Node::from(ref_resource.clone()), vec![])
-          })
+          .map(|ref_resource| AST(Node::from(ref_resource.clone()), vec![]))
           .filter(|a| should_keep(a.0.typ.clone()))
           .collect();
 
@@ -85,9 +83,12 @@ fn find_references(template: Template, resource_name: Name) -> Vec<Resource> {
   template
     .resources
     .into_iter()
-    .filter(|resource| match resource.properties {
-      Property::Other(ref properties) => properties.to_string().contains(&resource_name.0),
-      _ => false, // TODO: Work out how to find references in lambda, sqs, gateway
+    .filter(|resource| match &resource.properties {
+      Property::Other(properties) => properties.to_string().contains(&resource_name.0),
+      Property::ApiGateway { integration, .. } => {
+        integration.to_string().contains(&resource_name.0)
+      }
+      _ => false, // TODO: Work out how to find references in lambda, sqs
     })
     .collect()
 }
