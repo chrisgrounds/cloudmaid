@@ -13,21 +13,21 @@ pub struct AST(pub Node, pub Vec<AST>);
 impl AST {
   pub fn to_mermaid(&self) -> String {
     let mut result = String::from("```mermaid\nflowchart LR\n");
-    self.to_mermaid_helper(&mut result, "");
+    self.to_mermaid_helper(&mut result, &Node { name: Name("".to_string()), typ: ResourceType::Other, properties: Property::Other(json!("")) });
     result.push_str(&String::from("```").to_string());
     result
   }
 
-  fn to_mermaid_helper(&self, result: &mut String, parent_name: &str) {
-    let node_name = &self.0.get_name();
+  fn to_mermaid_helper(&self, result: &mut String, parent_node: &Node) {
+    let node = &self.0;
 
-    match (node_name, parent_name) {
-      (n, "") => result.push_str(&format!("{}\n", n)),
+    match (node, parent_node) {
+      (n, Node { name: Name(p), .. }) if p.is_empty() => result.push_str(&format!("{}\n", n)),
       (n, p) => result.push_str(&format!("{} --> {}\n", n, p)),
     }
 
     for child in &self.1 {
-      child.to_mermaid_helper(result, node_name);
+      child.to_mermaid_helper(result, node);
     }
   }
 }
@@ -37,6 +37,17 @@ pub struct Node {
   pub name: Name,
   pub typ: ResourceType,
   pub properties: Property,
+}
+
+impl std::fmt::Display for Node {
+  fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    match &self.typ {
+      ResourceType::Lambda => write!(f, "{}([{}])", &self.get_name(), &self.get_name()),
+      ResourceType::Sqs => write!(f, "{}(({}))", &self.get_name(), &self.get_name()),
+      ResourceType::ApiGateway => write!(f, "{}[[{}]]", &self.get_name(), &self.get_name()),
+      _ => write!(f, ""),
+    }
+  }
 }
 
 impl Node {
