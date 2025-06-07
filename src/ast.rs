@@ -63,6 +63,7 @@ impl From<Template> for AST {
           .map(|ref_resource| {
             AST(Node::from(ref_resource.clone()), vec![])
           })
+          .filter(|a| should_keep(a.0.typ.clone()))
           .collect();
 
         ast_nodes.push(AST(node, child_asts));
@@ -86,7 +87,7 @@ fn find_references(template: Template, resource_name: Name) -> Vec<Resource> {
     .into_iter()
     .filter(|resource| match resource.properties {
       Property::Other(ref properties) => properties.to_string().contains(&resource_name.0),
-      _ => false,
+      _ => false, // TODO: Work out how to find references in lambda, sqs, gateway
     })
     .collect()
 }
