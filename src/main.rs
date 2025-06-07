@@ -2,9 +2,9 @@ use serde_json::from_str;
 use std::fs;
 use clap::Parser;
 
-use cf_to_mermaid::ast::ast::AST;
-use cf_to_mermaid::cloudformation::template::Template;
-use cf_to_mermaid::cli::parse::Args;
+use cloudmaid::ast::ast::AST;
+use cloudmaid::cloudformation::template::Template;
+use cloudmaid::cli::parse::Args;
 
 fn main() {
   let args = Args::parse();
