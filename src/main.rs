@@ -1,31 +1,29 @@
 use serde_json::from_str;
 use std::fs;
+use clap::Parser;
 
 use cf_to_mermaid::ast::ast::AST;
 use cf_to_mermaid::cloudformation::template::Template;
+use cf_to_mermaid::cli::parse::Args;
 
 fn main() {
-  println!("Hello, world!");
-  let file_path = "data/sample-stack.template.json";
-  let output_file_path = "output.md";
+  let args = Args::parse();
 
-  match fs::read_to_string(file_path) {
+  match fs::read_to_string(args.input_file) {
     Ok(contents) => {
-      println!("File contents:\n{}", contents);
-
       let cloudformation_template: Template = from_str(&contents.to_string()).unwrap();
       let ast = AST::from(cloudformation_template);
       let mermaid_representation = ast.to_mermaid();
 
-      if fs::metadata(output_file_path).is_ok() {
-        match fs::remove_file(output_file_path) {
-          Ok(_) => println!("Deleted existing {}", output_file_path),
+      if fs::metadata(&args.output_file).is_ok() {
+        match fs::remove_file(&args.output_file) {
+          Ok(_) => println!("Deleted existing {}", &args.output_file),
           Err(e) => println!("Error deleting file: {}", e),
         }
       }
 
-      match fs::write(output_file_path, mermaid_representation) {
-        Ok(_) => println!("Mermaid representation written to {}", output_file_path),
+      match fs::write(&args.output_file, mermaid_representation) {
+        Ok(_) => println!("Mermaid representation written to {}", &args.output_file),
         Err(e) => println!("Error writing to file: {}", e),
       }
     }
