@@ -1,7 +1,8 @@
 use serde_json::json;
 
 use crate::ast::node::Node;
-use crate::cloudformation::resource::{Name, Property, Resource, ResourceType};
+use crate::cloudformation::property::Property;
+use crate::cloudformation::resource::{Name, Resource, ResourceType};
 use crate::cloudformation::template::Template;
 
 #[derive(Debug, PartialEq, Clone)]
@@ -261,7 +262,7 @@ mod tests {
     let ast = AST(lambda_node, vec![]);
 
     let mermaid_output = ast.to_mermaid();
-    let expected_output = "```mermaid\ngraph TD;\nmylambda\n```";
+    let expected_output = "```mermaid\nflowchart LR\nmylambda([mylambda])\n```";
 
     assert_eq!(mermaid_output, expected_output);
   }

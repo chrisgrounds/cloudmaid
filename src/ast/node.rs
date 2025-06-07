@@ -1,4 +1,5 @@
-use crate::cloudformation::resource::{Name, Property, Resource, ResourceType};
+use crate::cloudformation::property::Property;
+use crate::cloudformation::resource::{Name, Resource, ResourceType};
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct Node {

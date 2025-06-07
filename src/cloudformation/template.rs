@@ -54,7 +54,8 @@ where
 mod test {
   use serde_json::json;
 
-  use crate::cloudformation::resource::{Name, Property, ResourceType};
+  use crate::cloudformation::property::Property;
+  use crate::cloudformation::resource::{Name, ResourceType};
 
   use super::*;
 

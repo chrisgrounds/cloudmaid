@@ -1,5 +1,6 @@
 use serde::Deserialize;
 use serde_json::from_value;
+use crate::cloudformation::property::Property;
 
 #[derive(Debug, Deserialize, Clone, PartialEq)]
 pub struct Resource {
@@ -14,28 +15,6 @@ pub enum ResourceType {
   Sqs,
   ApiGateway,
   Other,
-}
-
-#[derive(Debug, PartialEq, Clone, Deserialize)]
-#[serde(untagged)]
-pub enum Property {
-  Lambda {
-    #[serde(rename = "FunctionName")]
-    function_name: String,
-    #[serde(rename = "Architectures")]
-    architectures: Vec<String>,
-  },
-  Sqs {
-    #[serde(rename = "QueueName")]
-    queue_name: String,
-  },
-  ApiGateway {
-    #[serde(rename = "HttpMethod")]
-    http_method: String,
-    #[serde(rename = "Integration")]
-    integration: serde_json::Value,
-  },
-  Other(serde_json::Value),
 }
 
 #[derive(Debug, Deserialize, Clone, PartialEq)]
