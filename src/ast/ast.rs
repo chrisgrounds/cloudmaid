@@ -1,69 +1,45 @@
-use serde_json::json;
-
 use crate::ast::node::Node;
 use crate::cloudformation::property::Property;
 use crate::cloudformation::resource::{Name, Resource, ResourceType};
 use crate::cloudformation::template::Template;
 
 #[derive(Debug, PartialEq, Clone)]
-pub struct AST(pub Node, pub Vec<AST>);
+pub struct AST {
+  pub edges: Vec<(Node, Node)>,
+}
 
 impl AST {
   pub fn to_mermaid(&self) -> String {
     let mut result = String::from("```mermaid\nflowchart LR\n");
-    self.to_mermaid_helper(
-      &mut result,
-      &Node {
-        name: Name("".to_string()),
-        typ: ResourceType::Other,
-        properties: Property::Other(json!("")),
-      },
-    );
-    result.push_str(&String::from("```").to_string());
+    
+    for (from, to) in &self.edges {
+      result.push_str(&format!("{} --> {}\n", from, to));
+    }
+    
+    result.push_str("```");
     result
-  }
-
-  fn to_mermaid_helper(&self, result: &mut String, parent_node: &Node) {
-    let node = &self.0;
-
-    match (node, parent_node) {
-      (n, Node { name: Name(p), .. }) if p.is_empty() => result.push_str(&format!("{}\n", n)),
-      (n, p) => result.push_str(&format!("{} --> {}\n", n, p)),
-    }
-
-    for child in &self.1 {
-      child.to_mermaid_helper(result, node);
-    }
   }
 }
 
 impl From<Template> for AST {
   fn from(template: Template) -> Self {
-    let mut ast_nodes = Vec::new();
+    let mut edges = Vec::new();
 
     for resource in &template.resources {
       if should_keep(resource.typ.clone()) {
-        let node = Node::from(resource.clone());
+        let referenced_node = Node::from(resource.clone());
         let references = find_references(template.clone(), resource.name.clone());
 
-        let child_asts: Vec<AST> = references
-          .into_iter()
-          .map(|ref_resource| AST(Node::from(ref_resource.clone()), vec![]))
-          .filter(|a| should_keep(a.0.typ.clone()))
-          .collect();
-
-        ast_nodes.push(AST(node, child_asts));
+        for ref_resource in references {
+          if should_keep(ref_resource.typ.clone()) {
+            let referencing_node = Node::from(ref_resource);
+            edges.push((referencing_node, referenced_node.clone()));
+          }
+        }
       }
     }
 
-    AST(
-      Node {
-        name: Name("".to_string()),
-        typ: ResourceType::Other,
-        properties: Property::Other(json!("")),
-      },
-      ast_nodes,
-    )
+    AST { edges }
   }
 }
 
@@ -97,105 +73,109 @@ mod tests {
   use super::*;
 
   #[test]
-  fn test_ast_construction_single_node() {
-    let node = Node {
+  fn test_ast_construction_single_edge() {
+    let node1 = Node {
       name: Name("name1".to_string()),
+      typ: ResourceType::Sqs,
+      properties: Property::Sqs {
+        queue_name: "queue1".to_string(),
+      },
+    };
+    let node2 = Node {
+      name: Name("name2".to_string()),
       typ: ResourceType::Lambda,
-      properties: Property::Other(json!("")),
+      properties: Property::Lambda {
+        function_name: "lambda1".to_string(),
+        architectures: vec!["arm64".to_string()],
+      },
     };
-    let ast = AST(node.clone(), vec![]);
+    let ast = AST { edges: vec![(node1.clone(), node2.clone())] };
 
-    assert_eq!(ast, AST(node, vec![]));
+    assert_eq!(ast, AST { edges: vec![(node1, node2)] });
   }
 
   #[test]
-  fn test_ast_construction_with_child() {
-    let parent_node = Node {
-      name: Name("name1".to_string()),
-      typ: ResourceType::Other,
-      properties: Property::Other(json!("")),
-    };
-    let child_ast = AST(
-      Node {
-        name: Name("name1".to_string()),
-        typ: ResourceType::Other,
-        properties: Property::Other(json!("")),
+  fn test_ast_construction_multiple_edges() {
+    let sqs_node = Node {
+      name: Name("queue1".to_string()),
+      typ: ResourceType::Sqs,
+      properties: Property::Sqs {
+        queue_name: "queue1".to_string(),
       },
-      vec![],
-    );
-    let parent_ast = AST(parent_node.clone(), vec![child_ast.clone()]);
+    };
+    let lambda_node1 = Node {
+      name: Name("lambda1".to_string()),
+      typ: ResourceType::Lambda,
+      properties: Property::Lambda {
+        function_name: "lambda1".to_string(),
+        architectures: vec!["arm64".to_string()],
+      },
+    };
+    let lambda_node2 = Node {
+      name: Name("lambda2".to_string()),
+      typ: ResourceType::Lambda,
+      properties: Property::Lambda {
+        function_name: "lambda2".to_string(),
+        architectures: vec!["arm64".to_string()],
+      },
+    };
+    
+    let ast = AST { 
+      edges: vec![
+        (sqs_node.clone(), lambda_node1.clone()),
+        (sqs_node.clone(), lambda_node2.clone())
+      ] 
+    };
 
-    assert_eq!(parent_ast, AST(parent_node, vec![child_ast]));
+    assert_eq!(ast, AST { 
+      edges: vec![
+        (sqs_node.clone(), lambda_node1),
+        (sqs_node, lambda_node2)
+      ] 
+    });
   }
 
   #[test]
-  fn test_ast_construction_multiple_children() {
-    let parent_node = Node {
-      name: Name("name1".to_string()),
-      typ: ResourceType::Other,
-      properties: Property::Other(json!("")),
+  fn test_ast_construction_chain_edges() {
+    let api_node = Node {
+      name: Name("api".to_string()),
+      typ: ResourceType::ApiGateway,
+      properties: Property::ApiGateway {
+        http_method: "POST".to_string(),
+        integration: serde_json::json!({}),
+      },
     };
-    let child_ast1 = AST(
-      Node {
-        name: Name("name1".to_string()),
-        typ: ResourceType::Other,
-        properties: Property::Other(json!("")),
+    let lambda_node = Node {
+      name: Name("lambda".to_string()),
+      typ: ResourceType::Lambda,
+      properties: Property::Lambda {
+        function_name: "lambda".to_string(),
+        architectures: vec!["arm64".to_string()],
       },
-      vec![],
-    );
-    let child_ast2 = AST(
-      Node {
-        name: Name("name1".to_string()),
-        typ: ResourceType::Other,
-        properties: Property::Other(json!("")),
+    };
+    let sqs_node = Node {
+      name: Name("queue".to_string()),
+      typ: ResourceType::Sqs,
+      properties: Property::Sqs {
+        queue_name: "queue".to_string(),
       },
-      vec![],
-    );
-    let parent_ast = AST(
-      parent_node.clone(),
-      vec![child_ast1.clone(), child_ast2.clone()],
-    );
+    };
+    
+    let ast = AST { 
+      edges: vec![
+        (api_node.clone(), lambda_node.clone()),
+        (lambda_node.clone(), sqs_node.clone())
+      ] 
+    };
 
-    assert_eq!(parent_ast, AST(parent_node, vec![child_ast1, child_ast2]));
+    assert_eq!(ast, AST { 
+      edges: vec![
+        (api_node, lambda_node.clone()),
+        (lambda_node, sqs_node)
+      ] 
+    });
   }
 
-  #[test]
-  fn test_ast_construction_multiple_nested_children() {
-    let parent_node = Node {
-      name: Name("name1".to_string()),
-      typ: ResourceType::Other,
-      properties: Property::Other(json!("")),
-    };
-    let child_ast1 = AST(
-      Node {
-        name: Name("name1".to_string()),
-        typ: ResourceType::Other,
-        properties: Property::Other(json!("")),
-      },
-      vec![AST(
-        Node {
-          name: Name("name1".to_string()),
-          typ: ResourceType::Other,
-          properties: Property::Other(json!("")),
-        },
-        vec![],
-      )],
-    );
-    let child_ast2 = AST(
-      Node {
-        name: Name("name1".to_string()),
-        typ: ResourceType::Other,
-        properties: Property::Other(json!("")),
-      },
-      vec![],
-    );
-    let parent_ast = AST(
-      parent_node.clone(),
-      vec![child_ast1.clone(), child_ast2.clone()],
-    );
-
-    assert_eq!(parent_ast, AST(parent_node, vec![child_ast1, child_ast2]));
-  }
 
   #[test]
   fn test_ast_from_template() {
@@ -211,58 +191,288 @@ mod tests {
         },
         Resource {
           name: Name("mygateway".to_string()),
-          typ: ResourceType::Other,
-          properties: Property::Other(json!("mylambda")),
+          typ: ResourceType::ApiGateway,
+          properties: Property::ApiGateway {
+            http_method: "POST".to_string(),
+            integration: json!("mylambda"),
+          },
         },
       ],
     };
 
     let ast = AST::from(template);
 
-    assert_eq!(
-      ast,
-      AST(
-        Node {
-          name: Name("Root".to_string()),
-          typ: ResourceType::Other,
-          properties: Property::Other(json!(""))
-        },
-        vec![AST(
-          Node {
-            name: Name("mygateway".to_string()),
-            typ: ResourceType::Other,
-            properties: Property::Other(json!("mylambda"))
-          },
-          vec![AST(
-            Node {
-              name: Name("mylambda".to_string()),
-              typ: ResourceType::Lambda,
-              properties: Property::Lambda {
-                function_name: "mylambda".to_string(),
-                architectures: vec!["arm64".to_string()],
-              }
-            },
-            vec![]
-          )]
-        )]
-      )
-    );
-  }
-
-  #[test]
-  fn test_to_mermaid_with_lambda_node() {
-    let lambda_node = Node {
-      name: Name("reallylongname".to_string()),
+    let expected_gateway_node = Node {
+      name: Name("mygateway".to_string()),
+      typ: ResourceType::ApiGateway,
+      properties: Property::ApiGateway {
+        http_method: "POST".to_string(),
+        integration: json!("mylambda"),
+      },
+    };
+    let expected_lambda_node = Node {
+      name: Name("mylambda".to_string()),
       typ: ResourceType::Lambda,
       properties: Property::Lambda {
         function_name: "mylambda".to_string(),
         architectures: vec!["arm64".to_string()],
       },
     };
-    let ast = AST(lambda_node, vec![]);
+
+    assert_eq!(
+      ast,
+      AST {
+        edges: vec![(expected_gateway_node, expected_lambda_node)]
+      }
+    );
+  }
+
+  #[test]
+  fn test_to_mermaid_with_single_edge() {
+    let sqs_node = Node {
+      name: Name("myqueue".to_string()),
+      typ: ResourceType::Sqs,
+      properties: Property::Sqs {
+        queue_name: "myqueue".to_string(),
+      },
+    };
+    let lambda_node = Node {
+      name: Name("mylambda".to_string()),
+      typ: ResourceType::Lambda,
+      properties: Property::Lambda {
+        function_name: "mylambda".to_string(),
+        architectures: vec!["arm64".to_string()],
+      },
+    };
+    
+    let ast = AST {
+      edges: vec![(sqs_node, lambda_node)]
+    };
 
     let mermaid_output = ast.to_mermaid();
-    let expected_output = "```mermaid\nflowchart LR\nmylambda([mylambda])\n```";
+    let expected_output = "```mermaid\nflowchart LR\nmyqueue((myqueue)) --> mylambda([mylambda])\n```";
+
+    assert_eq!(mermaid_output, expected_output);
+  }
+
+  #[test]
+  fn test_empty_template() {
+    let template = Template {
+      resources: vec![],
+    };
+
+    let ast = AST::from(template);
+
+    assert_eq!(ast, AST { edges: vec![] });
+
+    let mermaid_output = ast.to_mermaid();
+    let expected_output = "```mermaid\nflowchart LR\n```";
+
+    assert_eq!(mermaid_output, expected_output);
+  }
+
+  #[test]
+  fn test_fan_in_pattern() {
+    let template = Template {
+      resources: vec![
+        Resource {
+          name: Name("mylambda".to_string()),
+          typ: ResourceType::Lambda,
+          properties: Property::Lambda {
+            function_name: "mylambda".to_string(),
+            architectures: vec!["arm64".to_string()],
+          },
+        },
+        Resource {
+          name: Name("myapi".to_string()),
+          typ: ResourceType::ApiGateway,
+          properties: Property::ApiGateway {
+            http_method: "POST".to_string(),
+            integration: json!("mylambda"),
+          },
+        },
+        Resource {
+          name: Name("myqueue".to_string()),
+          typ: ResourceType::Sqs,
+          properties: Property::Sqs {
+            queue_name: "myqueue".to_string(),
+          },
+        },
+      ],
+    };
+
+    let ast = AST::from(template);
+
+    let expected_lambda_node = Node {
+      name: Name("mylambda".to_string()),
+      typ: ResourceType::Lambda,
+      properties: Property::Lambda {
+        function_name: "mylambda".to_string(),
+        architectures: vec!["arm64".to_string()],
+      },
+    };
+    let expected_api_node = Node {
+      name: Name("myapi".to_string()),
+      typ: ResourceType::ApiGateway,
+      properties: Property::ApiGateway {
+        http_method: "POST".to_string(),
+        integration: json!("mylambda"),
+      },
+    };
+
+    // Should have one edge: API Gateway -> Lambda
+    // Note: SQS doesn't reference Lambda in this example, so no edge there
+    assert_eq!(
+      ast,
+      AST {
+        edges: vec![(expected_api_node, expected_lambda_node)]
+      }
+    );
+
+    let mermaid_output = ast.to_mermaid();
+    let expected_output = "```mermaid\nflowchart LR\nmyapi[[myapi]] --> mylambda([mylambda])\n```";
+
+    assert_eq!(mermaid_output, expected_output);
+  }
+
+  #[test]
+  fn test_mixed_resource_types_filtering() {
+    let template = Template {
+      resources: vec![
+        Resource {
+          name: Name("mylambda".to_string()),
+          typ: ResourceType::Lambda,
+          properties: Property::Lambda {
+            function_name: "mylambda".to_string(),
+            architectures: vec!["arm64".to_string()],
+          },
+        },
+        Resource {
+          name: Name("myapi".to_string()),
+          typ: ResourceType::ApiGateway,
+          properties: Property::ApiGateway {
+            http_method: "POST".to_string(),
+            integration: json!("mylambda"),
+          },
+        },
+        Resource {
+          name: Name("unsupported".to_string()),
+          typ: ResourceType::Other,
+          properties: Property::Other(json!("some value")),
+        },
+      ],
+    };
+
+    let ast = AST::from(template);
+
+    let expected_lambda_node = Node {
+      name: Name("mylambda".to_string()),
+      typ: ResourceType::Lambda,
+      properties: Property::Lambda {
+        function_name: "mylambda".to_string(),
+        architectures: vec!["arm64".to_string()],
+      },
+    };
+    let expected_api_node = Node {
+      name: Name("myapi".to_string()),
+      typ: ResourceType::ApiGateway,
+      properties: Property::ApiGateway {
+        http_method: "POST".to_string(),
+        integration: json!("mylambda"),
+      },
+    };
+
+    // Should only have API Gateway -> Lambda edge
+    // The "Other" resource type should be filtered out by should_keep()
+    assert_eq!(
+      ast,
+      AST {
+        edges: vec![(expected_api_node, expected_lambda_node)]
+      }
+    );
+
+    let mermaid_output = ast.to_mermaid();
+    let expected_output = "```mermaid\nflowchart LR\nmyapi[[myapi]] --> mylambda([mylambda])\n```";
+
+    assert_eq!(mermaid_output, expected_output);
+  }
+
+  #[test]
+  fn test_no_dependencies() {
+    let template = Template {
+      resources: vec![
+        Resource {
+          name: Name("lambda1".to_string()),
+          typ: ResourceType::Lambda,
+          properties: Property::Lambda {
+            function_name: "lambda1".to_string(),
+            architectures: vec!["arm64".to_string()],
+          },
+        },
+        Resource {
+          name: Name("lambda2".to_string()),
+          typ: ResourceType::Lambda,
+          properties: Property::Lambda {
+            function_name: "lambda2".to_string(),
+            architectures: vec!["arm64".to_string()],
+          },
+        },
+        Resource {
+          name: Name("queue1".to_string()),
+          typ: ResourceType::Sqs,
+          properties: Property::Sqs {
+            queue_name: "queue1".to_string(),
+          },
+        },
+      ],
+    };
+
+    let ast = AST::from(template);
+
+    // No resources reference each other, so no edges should be created
+    assert_eq!(ast, AST { edges: vec![] });
+
+    let mermaid_output = ast.to_mermaid();
+    let expected_output = "```mermaid\nflowchart LR\n```";
+
+    assert_eq!(mermaid_output, expected_output);
+  }
+
+  #[test]
+  fn test_to_mermaid_with_multiple_edges() {
+    let api_node = Node {
+      name: Name("myapi".to_string()),
+      typ: ResourceType::ApiGateway,
+      properties: Property::ApiGateway {
+        http_method: "POST".to_string(),
+        integration: serde_json::json!({}),
+      },
+    };
+    let lambda_node = Node {
+      name: Name("mylambda".to_string()),
+      typ: ResourceType::Lambda,
+      properties: Property::Lambda {
+        function_name: "mylambda".to_string(),
+        architectures: vec!["arm64".to_string()],
+      },
+    };
+    let sqs_node = Node {
+      name: Name("myqueue".to_string()),
+      typ: ResourceType::Sqs,
+      properties: Property::Sqs {
+        queue_name: "myqueue".to_string(),
+      },
+    };
+    
+    let ast = AST {
+      edges: vec![
+        (api_node, lambda_node.clone()),
+        (lambda_node, sqs_node)
+      ]
+    };
+
+    let mermaid_output = ast.to_mermaid();
+    let expected_output = "```mermaid\nflowchart LR\nmyapi[[myapi]] --> mylambda([mylambda])\nmylambda([mylambda]) --> myqueue((myqueue))\n```";
 
     assert_eq!(mermaid_output, expected_output);
   }
