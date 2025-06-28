@@ -24,8 +24,15 @@ MyQueue((MyQueue)) --> MyLambda([MyLambda])
 
 ## Architecture 🏗️
 
-### Core Data Flow 
-1. **CLI parsing** (clap) → **Template deserialization** (serde_json) → **Edge extraction** → **Mermaid generation** 📊
+### Core Data Flow 🔄
+
+```mermaid
+flowchart LR
+    CLI[CLI parsing<br/>clap] --> Parse[Template deserialization<br/>serde_json]
+    Parse --> Extract[Edge extraction<br/>AST construction]
+    Extract --> Generate[Mermaid generation<br/>diagram output] 
+    Generate --> Output[📊 diagram.md]
+```
 
 ### AST Structure 🌳
 
