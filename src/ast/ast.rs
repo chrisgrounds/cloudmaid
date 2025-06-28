@@ -29,13 +29,11 @@ impl From<Template> for AST {
       if should_keep(resource.typ.clone()) {
         match resource.typ {
           ResourceType::EventSourceMapping => {
-            // Handle EventSourceMapping as a special case
             if let Some((source_queue, target_lambda)) = extract_event_source_mapping_refs(resource, &template) {
               edges.push((source_queue, target_lambda));
             }
           },
           _ => {
-            // Handle normal resource references
             let referenced_node = Node::from(resource.clone());
             let references = find_references(template.clone(), resource.name.clone());
 
@@ -63,20 +61,17 @@ fn find_references(template: Template, resource_name: Name) -> Vec<Resource> {
       Property::ApiGateway { integration, .. } => {
         integration.to_string().contains(&resource_name.0)
       }
-      _ => false, // TODO: Work out how to find references in lambda, sqs
+      _ => false,
     })
     .collect()
 }
 
 fn extract_event_source_mapping_refs(resource: &Resource, template: &Template) -> Option<(Node, Node)> {
   if let Property::EventSourceMapping { event_source_arn, function_name } = &resource.properties {
-    // Extract SQS queue name from EventSourceArn (Fn::GetAtt)
     let queue_name = extract_ref_from_getatt(event_source_arn)?;
     
-    // Extract Lambda function name from FunctionName (Ref)
     let lambda_name = extract_ref_from_ref(function_name)?;
     
-    // Find the actual resources in the template
     let queue_resource = template.resources.iter().find(|r| r.name.0 == queue_name)?;
     let lambda_resource = template.resources.iter().find(|r| r.name.0 == lambda_name)?;
     
@@ -87,7 +82,6 @@ fn extract_event_source_mapping_refs(resource: &Resource, template: &Template) -
 }
 
 fn extract_ref_from_getatt(value: &serde_json::Value) -> Option<String> {
-  // Handle {"Fn::GetAtt": ["resource_name", "Arn"]}
   if let Some(get_att) = value.get("Fn::GetAtt") {
     if let Some(array) = get_att.as_array() {
       if let Some(resource_name) = array.get(0) {
@@ -99,7 +93,6 @@ fn extract_ref_from_getatt(value: &serde_json::Value) -> Option<String> {
 }
 
 fn extract_ref_from_ref(value: &serde_json::Value) -> Option<String> {
-  // Handle {"Ref": "resource_name"}
   if let Some(ref_value) = value.get("Ref") {
     return ref_value.as_str().map(|s| s.to_string());
   }
@@ -370,8 +363,6 @@ mod tests {
       },
     };
 
-    // Should have one edge: API Gateway -> Lambda
-    // Note: SQS doesn't reference Lambda in this example, so no edge there
     assert_eq!(
       ast,
       AST {
@@ -432,8 +423,6 @@ mod tests {
       },
     };
 
-    // Should only have API Gateway -> Lambda edge
-    // The "Other" resource type should be filtered out by should_keep()
     assert_eq!(
       ast,
       AST {
@@ -479,7 +468,6 @@ mod tests {
 
     let ast = AST::from(template);
 
-    // No resources reference each other, so no edges should be created
     assert_eq!(ast, AST { edges: vec![] });
 
     let mermaid_output = ast.to_mermaid();
