@@ -19,5 +19,11 @@ pub enum Property {
     #[serde(rename = "Integration")]
     integration: serde_json::Value,
   },
+  EventSourceMapping {
+    #[serde(rename = "EventSourceArn")]
+    event_source_arn: serde_json::Value,
+    #[serde(rename = "FunctionName")]
+    function_name: serde_json::Value,
+  },
   Other(serde_json::Value),
 }

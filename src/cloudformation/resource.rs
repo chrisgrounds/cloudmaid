@@ -14,6 +14,7 @@ pub enum ResourceType {
   Lambda,
   Sqs,
   ApiGateway,
+  EventSourceMapping,
   Other,
 }
 
@@ -33,6 +34,7 @@ pub fn determine_resource_type(raw_type: &str) -> ResourceType {
     "AWS::Lambda::Function" => ResourceType::Lambda,
     "AWS::SQS::Queue" => ResourceType::Sqs,
     "AWS::ApiGateway::Method" => ResourceType::ApiGateway,
+    "AWS::Lambda::EventSourceMapping" => ResourceType::EventSourceMapping,
     _ => ResourceType::Other,
   }
 }

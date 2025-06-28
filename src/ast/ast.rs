@@ -27,13 +27,24 @@ impl From<Template> for AST {
 
     for resource in &template.resources {
       if should_keep(resource.typ.clone()) {
-        let referenced_node = Node::from(resource.clone());
-        let references = find_references(template.clone(), resource.name.clone());
+        match resource.typ {
+          ResourceType::EventSourceMapping => {
+            // Handle EventSourceMapping as a special case
+            if let Some((source_queue, target_lambda)) = extract_event_source_mapping_refs(resource, &template) {
+              edges.push((source_queue, target_lambda));
+            }
+          },
+          _ => {
+            // Handle normal resource references
+            let referenced_node = Node::from(resource.clone());
+            let references = find_references(template.clone(), resource.name.clone());
 
-        for ref_resource in references {
-          if should_keep(ref_resource.typ.clone()) {
-            let referencing_node = Node::from(ref_resource);
-            edges.push((referencing_node, referenced_node.clone()));
+            for ref_resource in references {
+              if should_keep(ref_resource.typ.clone()) {
+                let referencing_node = Node::from(ref_resource);
+                edges.push((referencing_node, referenced_node.clone()));
+              }
+            }
           }
         }
       }
@@ -57,12 +68,51 @@ fn find_references(template: Template, resource_name: Name) -> Vec<Resource> {
     .collect()
 }
 
+fn extract_event_source_mapping_refs(resource: &Resource, template: &Template) -> Option<(Node, Node)> {
+  if let Property::EventSourceMapping { event_source_arn, function_name } = &resource.properties {
+    // Extract SQS queue name from EventSourceArn (Fn::GetAtt)
+    let queue_name = extract_ref_from_getatt(event_source_arn)?;
+    
+    // Extract Lambda function name from FunctionName (Ref)
+    let lambda_name = extract_ref_from_ref(function_name)?;
+    
+    // Find the actual resources in the template
+    let queue_resource = template.resources.iter().find(|r| r.name.0 == queue_name)?;
+    let lambda_resource = template.resources.iter().find(|r| r.name.0 == lambda_name)?;
+    
+    Some((Node::from(queue_resource.clone()), Node::from(lambda_resource.clone())))
+  } else {
+    None
+  }
+}
+
+fn extract_ref_from_getatt(value: &serde_json::Value) -> Option<String> {
+  // Handle {"Fn::GetAtt": ["resource_name", "Arn"]}
+  if let Some(get_att) = value.get("Fn::GetAtt") {
+    if let Some(array) = get_att.as_array() {
+      if let Some(resource_name) = array.get(0) {
+        return resource_name.as_str().map(|s| s.to_string());
+      }
+    }
+  }
+  None
+}
+
+fn extract_ref_from_ref(value: &serde_json::Value) -> Option<String> {
+  // Handle {"Ref": "resource_name"}
+  if let Some(ref_value) = value.get("Ref") {
+    return ref_value.as_str().map(|s| s.to_string());
+  }
+  None
+}
+
 fn should_keep(typ: ResourceType) -> bool {
   match typ {
     ResourceType::Other => false,
     ResourceType::Lambda => true,
     ResourceType::Sqs => true,
     ResourceType::ApiGateway => true,
+    ResourceType::EventSourceMapping => true,
   }
 }
 
@@ -434,6 +484,72 @@ mod tests {
 
     let mermaid_output = ast.to_mermaid();
     let expected_output = "```mermaid\nflowchart LR\n```";
+
+    assert_eq!(mermaid_output, expected_output);
+  }
+
+  #[test]
+  fn test_event_source_mapping() {
+    let template = Template {
+      resources: vec![
+        Resource {
+          name: Name("MyQueue".to_string()),
+          typ: ResourceType::Sqs,
+          properties: Property::Sqs {
+            queue_name: "MyQueue".to_string(),
+          },
+        },
+        Resource {
+          name: Name("MyLambda".to_string()),
+          typ: ResourceType::Lambda,
+          properties: Property::Lambda {
+            function_name: "MyLambda".to_string(),
+            architectures: vec!["arm64".to_string()],
+          },
+        },
+        Resource {
+          name: Name("MyEventSourceMapping".to_string()),
+          typ: ResourceType::EventSourceMapping,
+          properties: Property::EventSourceMapping {
+            event_source_arn: json!({
+              "Fn::GetAtt": ["MyQueue", "Arn"]
+            }),
+            function_name: json!({
+              "Ref": "MyLambda"
+            }),
+          },
+        },
+      ],
+    };
+
+    let ast = AST::from(template);
+
+    let expected_queue_node = Node {
+      name: Name("MyQueue".to_string()),
+      typ: ResourceType::Sqs,
+      properties: Property::Sqs {
+        queue_name: "MyQueue".to_string(),
+      },
+    };
+    let expected_lambda_node = Node {
+      name: Name("MyLambda".to_string()),
+      typ: ResourceType::Lambda,
+      properties: Property::Lambda {
+        function_name: "MyLambda".to_string(),
+        architectures: vec!["arm64".to_string()],
+      },
+    };
+
+    // Should create SQS -> Lambda edge from EventSourceMapping
+    assert_eq!(
+      ast,
+      AST {
+        edges: vec![(expected_queue_node, expected_lambda_node)]
+      }
+    );
+
+    let mermaid_output = ast.to_mermaid();
+    let expected_output = "```mermaid\nflowchart LR\nMyQueue((MyQueue)) --> MyLambda([MyLambda])\n```";
 
     assert_eq!(mermaid_output, expected_output);
   }

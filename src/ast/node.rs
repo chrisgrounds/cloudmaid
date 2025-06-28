@@ -14,6 +14,7 @@ impl std::fmt::Display for Node {
       ResourceType::Lambda => write!(f, "{}([{}])", &self.get_name(), &self.get_name()),
       ResourceType::Sqs => write!(f, "{}(({}))", &self.get_name(), &self.get_name()),
       ResourceType::ApiGateway => write!(f, "{}[[{}]]", &self.get_name(), &self.get_name()),
+      ResourceType::EventSourceMapping => write!(f, "{}{{{}||}}", &self.get_name(), &self.get_name()),
       _ => write!(f, ""),
     }
   }
