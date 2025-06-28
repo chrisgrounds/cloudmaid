@@ -1,15 +1,15 @@
-# Cloudmaid
+# Cloudmaid 🧜‍♀️☁️
 
-A strongly-typed AWS CloudFormation to Mermaid parser, built in Rust. Generates mermaid diagrams showing data flow between AWS resources.
+A strongly-typed AWS CloudFormation to Mermaid parser, built in Rust 🦀. Generates mermaid diagrams showing data flow between AWS resources.
 
-## Supported AWS Resources
+## Supported AWS Resources 🚀
 
 - **AWS::Lambda::Function** → `([function_name])` (rounded rectangles)
 - **AWS::SQS::Queue** → `((queue_name))` (circles) 
 - **AWS::ApiGateway::Method** → `[[resource_name]]` (squares)
 - **AWS::Lambda::EventSourceMapping** → Creates SQS → Lambda connections
 
-## Usage
+## Usage 💻
 
 ```bash
 cargo run -- --input-file template.json --output-file diagram.md
@@ -22,12 +22,12 @@ MyAPI[[MyAPI]] --> MyLambda([MyLambda])
 MyQueue((MyQueue)) --> MyLambda([MyLambda])
 ```
 
-## Architecture
+## Architecture 🏗️
 
-### Core Data Flow
-1. **CLI parsing** (clap) → **Template deserialization** (serde_json) → **Edge extraction** → **Mermaid generation**
+### Core Data Flow 
+1. **CLI parsing** (clap) → **Template deserialization** (serde_json) → **Edge extraction** → **Mermaid generation** 📊
 
-### AST Structure
+### AST Structure 🌳
 
 The core `AST` type now uses a simple edge-based approach optimized for Mermaid diagram generation:
 
@@ -39,7 +39,7 @@ pub struct AST {
 
 where the tuple of `Node` are representing the from-to relationship.
 
-### CloudFormation Processing
+### CloudFormation Processing ☁️
 
 ```rust
 pub struct Template {
@@ -47,14 +47,14 @@ pub struct Template {
 }
 ```
 
-## Development
+## Development 🛠️
 
-- **Build**: `cargo build`
-- **Test**: `cargo test`
-- **Format**: `cargo fmt`
-- **Run**: `cargo run -- --input-file <INPUT> --output-file <OUTPUT>`
+- **Build**: `cargo build` 🔨
+- **Test**: `cargo test` ✅
+- **Format**: `cargo fmt` 💅
+- **Run**: `cargo run -- --input-file <INPUT> --output-file <OUTPUT>` 🚀
 
-## Contributing
+## Contributing 🤝
 
-Contributions more than welcome.
+Contributions more than welcome! 🎉
 
