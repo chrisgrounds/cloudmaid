@@ -4,10 +4,10 @@ A strongly-typed AWS CloudFormation to Mermaid parser, built in Rust 🦀. Gener
 
 ## Supported AWS Resources 🚀
 
-- **AWS::Lambda::Function** → `([function_name])` (rounded rectangles)
-- **AWS::SQS::Queue** → `((queue_name))` (circles) 
-- **AWS::ApiGateway::Method** → `[[resource_name]]` (squares)
-- **AWS::Lambda::EventSourceMapping** → Creates SQS → Lambda connections
+- AWS::Lambda::Function
+- AWS::SQS::Queue
+- AWS::ApiGateway::Method
+- AWS::Lambda::EventSourceMapping
 
 ## Usage 💻
 
