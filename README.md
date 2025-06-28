@@ -27,7 +27,7 @@ MyQueue((MyQueue)) --> MyLambda([MyLambda])
 ### Core Data Flow
 1. **CLI parsing** (clap) → **Template deserialization** (serde_json) → **Edge extraction** → **Mermaid generation**
 
-### AST Structure (Refactored)
+### AST Structure
 
 The core `AST` type now uses a simple edge-based approach optimized for Mermaid diagram generation:
 
