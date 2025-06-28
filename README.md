@@ -1,33 +1,60 @@
 # Cloudmaid
 
-A strongly-typed AWS Cloudformation to Mermaid parser, built in Rust.
+A strongly-typed AWS CloudFormation to Mermaid parser, built in Rust. Generates mermaid diagrams showing data flow between AWS resources.
+
+## Supported AWS Resources
+
+- **AWS::Lambda::Function** → `([function_name])` (rounded rectangles)
+- **AWS::SQS::Queue** → `((queue_name))` (circles) 
+- **AWS::ApiGateway::Method** → `[[resource_name]]` (squares)
+- **AWS::Lambda::EventSourceMapping** → Creates SQS → Lambda connections
 
 ## Usage
 
+```bash
+cargo run -- --input-file template.json --output-file diagram.md
 ```
-cloudmaid --input-file <INPUT_FILE> --output-file <OUTPUT_FILE>
+
+Example output:
+```mermaid
+flowchart LR
+MyAPI[[MyAPI]] --> MyLambda([MyLambda])
+MyQueue((MyQueue)) --> MyLambda([MyLambda])
 ```
 
-## Contributing
+## Architecture
 
-Contributions are welcome! Please feel free to open an issue or submit a pull request.
+### Core Data Flow
+1. **CLI parsing** (clap) → **Template deserialization** (serde_json) → **Edge extraction** → **Mermaid generation**
 
-To build simply run `cargo build` and to run, `cargo run`.
+### AST Structure (Refactored)
 
-### AST
-
-The core type is the `AST` type which is an recursive data type representing the relationships between resources in a Cloudformation template.
+The core `AST` type now uses a simple edge-based approach optimized for Mermaid diagram generation:
 
 ```rust
-pub struct AST(pub Node, pub Vec<AST>);
+pub struct AST {
+  pub edges: Vec<(Node, Node)>,
+}
 ```
 
-### Cloudformation
+where the tuple of `Node` are representing the from-to relationship.
 
-The core type is `Template` type which stores the results of parsing a Cloudformation template in a Vector of `Resource`s.
+### CloudFormation Processing
 
 ```rust
 pub struct Template {
   pub resources: Vec<Resource>,
 }
 ```
+
+## Development
+
+- **Build**: `cargo build`
+- **Test**: `cargo test`
+- **Format**: `cargo fmt`
+- **Run**: `cargo run -- --input-file <INPUT> --output-file <OUTPUT>`
+
+## Contributing
+
+Contributions more than welcome.
+
